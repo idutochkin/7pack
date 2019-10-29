@@ -1,0 +1,140 @@
+<!doctype html>
+<html ng-app="erp7App">
+
+<head>
+  <meta charset="utf-8">
+  <title>7pack | ERP</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="icon" type="image/x-icon" href="/dist/favicon.ico">
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/angularjs-datepicker/dist/angular-datepicker.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&amp;subset=cyrillic,hebrew,latin-ext" rel="stylesheet">
+</head>
+
+<body ng-controller="BodyCtrl">
+  <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <ui-view class="fill_env"></ui-view>
+  <!-- <script src="https://cdn.zingchart.com/zingchart.min.js"></script> -->
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/zingchart/client/zingchart.min.js"></script>
+  <script src="bower_components/ZingChart-AngularJS/src/zingchart-angularjs.js"></script>
+  <script src="bower_components/material-calendar/dist/angular-material-calendar.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/pdfmake/build/pdfmake.js"></script>
+  <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
+  <script src="bower_components/html2canvas/build/html2canvas.js"></script>
+  <script src="bower_components/angular-md5/angular-md5.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/angularjs-datepicker/dist/angular-datepicker.js"></script>
+  <script src="bower_components/angular-barcode/dist/td-barcode.js"></script>
+  <script src="bower_components/JsBarcode/dist/JsBarcode.all.min.js"></script>
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+  <script src="bower_components/angular-file-saver/dist/angular-file-saver.min.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- <script src="bower_components/chart.js/dist/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script> -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/app.core.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/dashboards/module.js"></script>
+  <script src="scripts/controllers/dashboards/personal.js"></script>
+  <script src="scripts/controllers/comm/body.js"></script>
+  <script src="scripts/controllers/comm/side-navigation.js"></script>
+  <script src="scripts/controllers/recipies/module.js"></script>
+  <script src="scripts/controllers/recipies/browser.js"></script>
+  <script src="scripts/controllers/recipies/selected.js"></script>
+  <script src="scripts/controllers/clients/module.js"></script>
+  <script src="scripts/controllers/clients/browser.js"></script>
+  <script src="scripts/controllers/clients/details.js"></script>
+  <script src="scripts/controllers/clients/new.js"></script>
+  <script src="scripts/controllers/clients/edit.js"></script>
+  <script src="scripts/controllers/user/module.js"></script>
+  <script src="scripts/controllers/user/login.js"></script>
+  <script src="scripts/services/navigator.js"></script>
+  <script src="scripts/controllers/production/module.js"></script>
+  <script src="scripts/controllers/production/bags-tracking.js"></script>
+  <script src="scripts/controllers/production/menu-planing.js"></script>
+  <script src="scripts/controllers/material/module.js"></script>
+  <script src="scripts/controllers/material/new.js"></script>
+  <script src="scripts/controllers/material/details.js"></script>
+  <script src="scripts/controllers/material/browser.js"></script>
+  <script src="scripts/controllers/production/menuplaningbrowser.js"></script>
+  <script src="scripts/controllers/production/planning.js"></script>
+  <script src="scripts/controllers/production/planning-edit.js"></script>
+  <script src="scripts/controllers/production/select-set-dialog.js"></script>
+  <script src="scripts/controllers/production/change-set-dialog.js"></script>
+  <script src="scripts/controllers/production/edit-row-dialog.js"></script>
+  <script src="scripts/directives/calendar.js"></script>
+  <script src="scripts/controllers/comm/header.js"></script>
+  <script src="scripts/controllers/recipies/datasheet.js"></script>
+  <script src="scripts/controllers/production/classificators.js"></script>
+  <script src="scripts/services/notificator.js"></script>
+  <script src="scripts/controllers/settings/module.js"></script>
+  <script src="scripts/controllers/settings/menu.js"></script>
+  <script src="scripts/controllers/settings/employees-browser.js"></script>
+  <script src="scripts/controllers/settings/employees-details.js"></script>
+  <script src="scripts/controllers/settings/employees-new.js"></script>
+  <script src="scripts/controllers/sales/module.js"></script>
+  <script src="scripts/controllers/sales/browser.js"></script>
+  <script src="scripts/controllers/sales/details.js"></script>
+  <script src="scripts/controllers/sales/new.js"></script>
+  <script src="scripts/controllers/sales/addproduct.js"></script>
+  <script src="scripts/controllers/sales/confirmation.js"></script>
+  <script src="scripts/controllers/timetracking/module.js"></script>
+  <script src="scripts/controllers/timetracking/registration.js"></script>
+  <script src="scripts/services/api.js"></script>
+  <script src="scripts/services/auth.js"></script>
+  <script src="scripts/services/charts.js"></script>
+  <script src="scripts/services/recipesTabs.js"></script>
+  <script src="scripts/controllers/production/bag-check.js"></script>
+  <script src="scripts/controllers/terminal/module.js"></script>
+  <script src="scripts/controllers/terminal/main.js"></script>
+  <script src="scripts/controllers/production/bag-label-modal.js"></script>
+  <script src="scripts/controllers/production/bag-label-print.js"></script>
+  <script src="scripts/controllers/production/driver-handout.js"></script>
+  <script src="scripts/controllers/material/photo.modal.js"></script>
+  <script src="scripts/controllers/recipies/material-add.js"></script>
+  <script src="scripts/controllers/recipies/create-product.js"></script>
+  <script src="scripts/controllers/recipies/photo-upload.js"></script>
+  <script src="scripts/controllers/production/add-menu-item.js"></script>
+  <script src="scripts/controllers/production/material-summary.js"></script>
+  <script src="scripts/controllers/production/sticker-report.js"></script>
+  <script src="scripts/controllers/production/create-set.js"></script>
+  <script src="scripts/controllers/production/bag-complete.js"></script>
+  <script src="scripts/controllers/sticker-printing.js"></script>
+  <script src="scripts/controllers/production/quality.js"></script>
+  <script src="scripts/controllers/production/report.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>

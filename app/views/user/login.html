@@ -1,0 +1,26 @@
+<div layout="column" layout-align="center center" layout-fill>
+    <form class="md-padding login_wrap anim_enter" layout="column" layout-align="center center" ng-submit="login(username, password)">
+        <div class="md-padding">
+            <img class="logo_image" src="./images/7pack_grey.png" ng-if="!loading">
+            <md-progress-circular intermediate md-diameter="20" ng-if="loading"></md-progress-circular>
+        </div>
+        <span class="error" ng-if="error.show">{{error.message}}</span>
+        <input ng-disabled="loading" 
+            class="login_input" 
+            placeholder="Vartotojo vardas" 
+            ng-model="username" 
+            required
+            ng-class="error.show ? 'error_input' : ''">
+        <input ng-disabled="loading" 
+            class="login_input" 
+            placeholder="Slaptažodis" 
+            type="password" 
+            ng-model="password" 
+            required
+            ng-class="error.show ? 'error_input' : ''">
+        <md-button class="md-raised md-primary" type="submit" ng-disabled="loading">
+            Prisijungti
+        </md-button>
+        <a href="#" class="a_forgotPass">Pamiršau slaptažodį</a>
+    </form>
+</div>

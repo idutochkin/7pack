@@ -1,0 +1,359 @@
+<div layout="column" ng-cloak>
+    <div layout="row" layout-align="start center">
+        <md-button ng-click="alterTabs.set(0)" ng-class="alterTabs.current == 0 ? 'md-raised md-primary' : ''">tikrinimas</md-button>
+        <md-button ng-click="alterTabs.set(1)" ng-class="alterTabs.current == 1 ? 'md-raised md-primary' : ''">Priskyrimas</md-button>
+        <md-button ng-click="alterTabs.set(2)" ng-class="alterTabs.current == 2 ? 'md-raised md-primary' : ''">išvežimas</md-button>
+    </div>
+    <md-card>
+
+        <div label="Tikrinimas" ng-show="alterTabs.current == 0">
+            <div layout="column" layout-align="space-between stretch">
+                <div layout="row" layout-align="space-between center" flex>
+                    <form flex="33" class="md-padding" layout="column" ng-submit="returnBag()">
+                        <div layout="row" layout-align="start center">
+                            <md-input-container>
+                                <label>Barkodas{{searchCfg == 1 ? ', Vardas, Adresas etc.' : ''}}</label>
+                                <input ng-model="barcodeInput" ng-change="inputChange()">
+                            </md-input-container>
+                            <div class="md-padding">
+                                <md-progress-circular md-diameter="20" ng-if="searchLoading"></md-progress-circular>
+                            </div>
+                        </div>
+
+                        <md-radio-group ng-model="searchCfg">
+                            <md-radio-button ng-value="1">Tikrinimas / Paieška</md-radio-button>
+                            <md-radio-button ng-value="2">Grąžinimas</md-radio-button>
+                        </md-radio-group>
+                        <!-- <md-button class="md-raised md-primary">Tikrinimas</md-button>
+                            <md-button class="md-raised ">Išvežami</md-button>
+                            <md-button class="md-raised ">Grįžtantys</md-button> -->
+                    </form>
+                    <md-divider></md-divider>
+                    <div flex="33" class="md-padding" layout="row" layout-align="center center">
+                        <div layout="column" class="indicator_wrap large_txt" flex="50">
+                            <span>{{countAway}}</span>
+                            <p>Išvežta</p>
+                        </div>
+                        <div layout="column" class="indicator_wrap large_txt" flex="50" ng-click="showLate()">
+                            <span>{{totalLate}}</span>
+                            <p>Vėluoja</p>
+                        </div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div flex="33" class="md-padding" layout="column" layout-align="end center">
+                        <!-- <calendar selected="calendar.date"></calendar> -->
+                        <md-datepicker ng-model="calendar.date">
+                            <input ng-model="calendar.date" type="text" />
+                        </md-datepicker>
+                    </div>
+                </div>
+                <div ng-if="loading" class="md-padding" layout="row" layout-align="center center">
+                    <md-progress-circular intermediate></md-progress-circular>
+                </div>
+                <div layout="row" layout-align="center center" class="md-padding" ng-hide="delayed.length != 0">
+                    <h3>Krepšių nėra</h3>
+                </div>
+                <table class="ingredients_table shrink" ng-if="!loading" ng-show="delayed.length != 0">
+                    <thead>
+                        <tr>
+                            <th class="pointer" ng-click="filterAssign.change('Barcode')">
+                                <span>Barcode</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Barcode'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Vardas_Pavarde')">
+                                <span>Vardas Pavardė</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Vardas_Pavarde'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Planas')">
+                                <span>Rinkinys</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Planas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th>Nuo</th>
+                            <th>Iki</th>
+
+                            <th class="pointer" ng-click="filterAssign.change('Pristatymo_Diena')">
+                                <span>Vartojimo diena</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Pristatymo_Diena'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Adresas')">
+                                <span>Adresas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Adresas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Miestas')">
+                                <span>Miestas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Miestas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Ikelta')">
+                                <span>Įkelta</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Ikelta'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Isvezta')">
+                                <span>Išvežta</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Isvezta'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Pristatyta')">
+                                <span>Pristatyta</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Pristatyta'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Grazinta')">
+                                <span>Grąžinta</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Grazinta'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Vairuotojas')">
+                                <span>Vairuotojas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Vairuotojas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Eiliskumas')">
+                                <span>Eiliškumas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Eiliskumas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dbag in delayed | orderBy : [filterAssign.col, 'Adresas'] : filterAssign.dir === 'asc' ? false : true"
+                            ng-class="dbag.late ? 'bag_late' : ''">
+
+                            <th>{{dbag.Barcode}}</th>
+                            <th>{{dbag.Vardas_Pavarde}}</th>
+                            <th>{{dbag.Planas}}</th>
+                            <th>{{dbag.Laikas_Nuo | date : "HH:mm" : '+0200'}}</th>
+                            <th>{{dbag.Laikas_Iki | date : "HH:mm" : '+0200'}}</th>
+                            <th>{{dbag.Pristatymo_Diena | date : "yyyy-MM-dd" }}</th>
+                            <th>{{dbag.Adresas}}</th>
+                            <th>{{dbag.Miestas}}</th>
+                            <th>{{dbag.Ikelta | date : "yyyy-MM-dd HH:mm" }}</th>
+                            <th>{{dbag.Isvezta | date : "yyyy-MM-dd HH:mm" }}</th>
+                            <th>{{dbag.Pristatyta | date : "yyyy-MM-dd HH:mm"}}</th>
+                            <th>{{dbag.Grazinta | date : "yyyy-MM-dd HH:mm" }}</th>
+                            <th>{{dbag.Vairuotojas ? driverName(dbag.Vairuotojas) : '-'}}</th>
+                            <th>{{dbag.Eiliskumas ? dbag.Eiliskumas : '-'}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div label="Priskyrimas" ng-show="alterTabs.current == 1">
+            <div layout="column" class="tab_inner">
+                <div layout="row" layout-align="space-between center" flex>
+                    <div class="md-padding" layout="column">
+                        <div layout="row" layout-align="start center">
+                            <div class="text_2line md-padding align-center">
+                                <span>{{totalAddresses}}</span>
+                                <p>Bendrai Adresų</p>
+                            </div>
+                            <div class="text_2line md-padding align-center">
+                                <span>{{totalBags}}</span>
+                                <p>Bendrai krepšių</p>
+                            </div>
+                            <div class="text_2line md-padding align-center" style="color:red">
+                                <span>{{notAssignedBags}}</span>
+                                <p>Nepriskirta krepšių</p>
+                            </div>
+                        </div>
+                        <div layout="column" layout-gt-md="row" layout-align-gt-md="space-between center">
+                            <div layout="row" layout-align="center center">
+                                <md-input-container>
+                                    <label>Vairuotojas</label>
+                                    <md-select ng-model="driverToAssign" ng-change="recalculateBags(driverToAssign)">
+                                        <md-option ng-repeat="driver in drivers | orderBy : 'Pavarde' : false" ng-value="driver.ID">{{driver.Pavarde}}
+                                            {{driver.Vardas}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-datepicker ng-model="assigmentDate" ng-change="loadBags()">
+                                    <input ng-model="assigmentDate" type="text" />
+                                </md-datepicker>
+                            </div>
+                            <div layout="row" layout-align="center center">
+                                <div class="text_2line md-padding align-center">
+                                    <span>{{driversAddresses}}</span>
+                                    <p>Adresai</p>
+                                </div>
+                                <div class="text_2line md-padding align-center">
+                                    <span>{{driversBags}}</span>
+                                    <p>Krepšiai</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-primary md-raised" ng-disabled="!driverToAssign" ng-click="assign.set(driverToAssign)">
+                            priskirti
+                        </md-button>
+                        <md-button class="md-raised" ng-click="assign.set()">
+                            grąžinti į šaldiklį
+                        </md-button>
+                    </div>
+
+                    <div class="md-padding" layout="column" layout-align="center start">
+                        <md-checkbox ng-model="showAll">Rodyti visus</md-checkbox>
+                        <md-checkbox ng-model="showAssigedOnly">Rodyti tik nepriskirtus</md-checkbox>
+                        <md-checkbox ng-model="showNotAssigned">Rodyti ir nepriskirtus</md-checkbox>
+                    </div>
+
+
+                </div>
+                <md-divider></md-divider>
+                <div ng-if="loading" class="md-padding" layout="row" layout-align="center center">
+                    <md-progress-circular intermediate></md-progress-circular>
+                </div>
+                <div layout="row" layout-align="center center" class="md-padding" ng-hide="bags.length != 0">
+                    <h3>Krepšių nėra</h3>
+                </div>
+                <table class="ingredients_table shrink" ng-if="!loading" ng-show="bags.length != 0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" ng-click="assign.selectAll()" ng-model="assign.selectedAll" />
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Barcode')">
+                                <span>Barcode</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Barcode'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Vardas_Pavarde')">
+                                <span>Pavardė, Vardas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Vardas_Pavarde'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Planas')">
+                                <span>Rinkinys</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Planas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Miestas')">
+                                <span>Miestas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Miestas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Zona')">
+                                <span>Zona</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Zona'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('PPD')">
+                                <span>PPD</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'PPD'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Adresas')">
+                                <span>Adresas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Adresas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Laikas_Nuo')">
+                                <span>Nuo</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Laikas_Nuo'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Laikas_Iki')">
+                                <span>Iki</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Laikas_Iki'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Vairuotojas')">
+                                <span>Vairuotojas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Vairuotojas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Eiliskumas')">
+                                <span>Eiliškumas</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Eiliskumas'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                            <th class="pointer" ng-click="filterAssign.change('Pastabos')">
+                                <span>Pastabos</span>
+                                <i class="material-icons md-14 filter-icon" ng-if="filterAssign.col == 'Pastabos'">{{filterAssign.dir
+                                    == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="bag in bags | orderBy : [filterAssign.col, 'Adresas'] : filterAssign.dir === 'asc' ? false : true"
+                            ng-show="conditionToShow(bag.Vairuotojas)">
+                            <th>
+                                <input type="checkbox" ng-model="bag.selectedForAssign" ng-change="assign.change()" />
+                            </th>
+                            <th>{{bag.Barcode}}</th>
+                            <th>{{bag.Vardas_Pavarde}}</th>
+                            <th>{{bag.Planas}}</th>
+                            <th>{{bag.Miestas}}</th>
+                            <th>{{bag.Zona}}</th>
+                            <th>{{bag.PPD ? 'Taip' : 'Ne'}}</th>
+                            <th>{{bag.Adresas}}</th>
+                            <th>{{bag.Laikas_Nuo | date : "yyyy-MM-dd HH:mm"}}</th>
+                            <th>{{bag.Laikas_Iki | date : "yyyy-MM-dd HH:mm"}}</th>
+                            <th>{{bag.Vairuotojas ? driverName(bag.Vairuotojas) : '-'}}</th>
+                            <th>
+                                <input style="max-width:50px;" type="number" ng-model="bag.Eiliskumas">
+                            </th>
+                            <th>
+                                {{bag.Pastabos | limitTo : 30 : 0}}
+                                <md-tooltip ng-if="bag.Pastabos.length > 30">{{bag.Pastabos}}</md-tooltip>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div label="Išvežimas" ng-show="alterTabs.current == 2">
+            <div layout="column" layout-align="center center" class="tab_inner md-padding">
+                <md-input-container>
+                    <label>Vairuotojas</label>
+                    <md-select ng-model="driverToCheck">
+                        <md-option ng-repeat="driver in drivers | orderBy : 'Pavarde' : false" ng-value="driver.ID">{{driver.Pavarde}}
+                            {{driver.Vardas}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button class="md-primary md-raised" ng-click="openCheck(driverToCheck)" ng-disabled="!driverToCheck">
+                    Tikrinti
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <div class="md-padding" layout="row" layout-align="center center">
+                <md-button class="md-raised" ng-click="handout()">
+                    spausdinti atminitinę
+                </md-button>
+                <md-button ng-click="openLabelModal()" class="md-raised" ng-disabled="!day.isOpen">
+                    Label spausdinimas
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <div class="md-padding" layout="column" layout-align="center center">
+                <span ng-if="!day.isOpen">Nėra atidarytos dienos</span>
+                <span ng-if="day.isOpen">Atidaryta diena : {{day.currentOpen.Einamoji_Diena | date : "yyyy-MM-dd" }}</span>
+                <md-datepicker ng-model="calendar.dayToOpen" ng-hide="day.isOpen">
+                    <label>Diena</label>
+                    <input type="text" />
+                </md-datepicker>
+            </div>
+            <div class="md-padding" layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="day.open(calendar.dayToOpen)" ng-hide="day.isOpen"
+                    ng-disabled="!calendar.dayToOpen">
+                    Atidaryti dieną
+                </md-button>
+                <md-button class="md-raised md-warn" ng-click="day.close()" ng-if="day.isOpen">
+                    uzdaryti dieną
+                </md-button>
+            </div>
+        </div>
+
+    </md-card>
+
+</div>

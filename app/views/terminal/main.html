@@ -1,0 +1,11 @@
+<md-toolbar layout="row" layout-align="space-between center">
+    <span style="text-transform:uppercase;padding : 0px 15px;">Terminalas</span>
+    <input ng-model="scan.input" ng-change="scan.change(scan.input)" id="terminal_input">
+    <span></span>
+</md-toolbar>
+<md-content layout="column" layout-align="center center" layout-fill>
+    <div  id="app_home" layout="column" layout-align="center center">
+        <h1 style="text-transform:uppercase">{{state.text}}</h1>
+        <h2 style="text-transform:uppercase">{{state.warning}}</h2>
+    </div>
+</md-content>

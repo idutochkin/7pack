@@ -1,0 +1,78 @@
+<md-dialog style="width:400px; min-height:75vh">
+  <md-toolbar layout="row" layout-align="space-between center">
+    <span class="md-padding">Keisti klientas</span>
+    <md-button layout="row" layout-align="center center" ng-click="closeDialog()">
+      <i class="material-icons">close</i>
+    </md-button>
+  </md-toolbar>
+  <md-dialog-content>
+    <div layout="row" layout-fill ng-controller="ClientsBrowserCtrl as clients_browser_ctrl">
+      <div class="browser_wrap_expanded">
+        <div>
+          <div layout="row" layout-fill layout-align="space-between center" class="browser_search_wrap">
+            <div flex="10" layout="column" layout-align="center center">
+              <i class="material-icons">search</i>
+            </div>
+            <input class="browser_input" ng-model="searchFish">
+            <div flex="10" layout="column" layout-align="center center">
+              <md-button class="md-icon-button" ng-click="searchFish = ''; sortType = 'ID'; sortReverse = false">
+                <i class="material-icons">clear</i>
+              </md-button>
+            </div>
+            <div flex="10" layout="column" layout-align="center center">
+              <md-button class="md-icon-button" ng-click="sortType = 'Pavarde';sortReverse = !sortReverse">
+                <i class="material-icons">filter_list</i>
+              </md-button>
+            </div>
+            <div flex="10" layout="column" layout-align="center center">
+              <md-button class="md-icon-button" ui-sref="clients.new">
+                <i class="material-icons">add</i>
+              </md-button>
+            </div>
+          </div>
+          <div>
+            <md-tabs md-dynamic-height>
+              <md-tab label="Fiziniai">
+                <md-content>
+                  <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="client in clients_browser_ctrl.clientsPersonal | filter : searchFish | orderBy:sortType:sortReverse">
+                      <div class="md-list-item-text" layout="column" ng-click="getInfo(client)">
+                        <h3>{{client.Vardas}} {{client.Pavarde}}</h3>
+                        <h4>{{client.Adresas_saskaitai}}</h4>
+                        <p layout="row" layout-align="space-between center">
+                          <span>{{client.Pagrindinis_telefonas}}</span>
+                          <span>{{client.ID}}</span>
+                        </p>
+                      </div>
+                    </md-list-item>
+                  </md-list>
+                </md-content>
+              </md-tab>
+              <md-tab label="Juridiniai">
+                <md-content>
+                  <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="client in clients_browser_ctrl.clientsCompany | filter : searchFish">
+                      <div class="md-list-item-text" layout="column" ng-click="getInfo(client)">
+                        <h3>{{client.Imones_Pavadinimas}}</h3>
+                        <h4>{{client.Adresas_saskaitai}}</h4>
+                        <p layout="row" layout-align="space-between center">
+                          <span>{{client.Pagrindinis_telefonas}}</span>
+                          <span>{{client.ID}}</span>
+                        </p>
+                      </div>
+                    </md-list-item>
+                  </md-list>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+          </div>
+        </div>
+      </div>
+      <md-divider></md-divider>
+
+      <md-content flex ui-view></md-content>
+
+
+    </div>
+  </md-dialog-content>
+</md-dialog>

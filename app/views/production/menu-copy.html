@@ -1,0 +1,13 @@
+<div style="min-width:400px; min-height:450px">
+<md-toolbar class="md-padding">
+    <span>Kopijuoti meniu</span>
+</md-toolbar>
+<md-content layout-fill layout="column" layout-align="start center" class="md-padding">
+    <md-radio-group ng-model="selected">
+        <md-radio-button value="1">Kopijuoti iš pasirinktos datos</md-radio-button>
+        <md-radio-button value="2">Kopijuoti į pasirinktą datą</md-radio-button>
+    </md-radio-group>
+    <calendar selected="calendar.date"></calendar>
+    <md-button>Kopijuoti</md-button>
+</md-content>
+</div>

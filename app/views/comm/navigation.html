@@ -1,0 +1,28 @@
+<md-toolbar layout="row" layout-align="space-between center" class=" header_wrap" md-whiteframe="4">
+    <div ng-show="$nav.expanded" class="animate_disappear">
+        <img class="logo_image" src="./images/7pack_grey.png">
+    </div>
+    <md-button class="md-icon-button" ng-click="$nav.toggle()" ng-show="$nav.visible">
+        <i class="material-icons">menu</i>
+    </md-button>
+</md-toolbar>
+
+<md-list>
+    <div ng-repeat="(pIdx , parent) in menu" class="animate-03s" ng-class="parent.expanded ? 'navigation_expanded' : '' ">
+        <md-list-item  layout="row" class="secondary-button-padding" ng-click="toggleChild(parent)">
+            <i class="material-icons icon_padding" flex="15">{{parent.icon}}</i>
+            <p ng-show="$nav.expanded" class="animate_disappear">{{parent.name}}</p>
+            <i ng-show="$nav.expanded" class="material-icons animate-rotate" ng-class="parent.expanded ? 'arrow-up' : '' ">v</i>
+        </md-list-item>
+        <div ng-if="parent.expandable" ng-show="parent.expanded && $nav.expanded" class="animate-shrink ">
+            <md-list-item ng-repeat="(cIdx , child) in parent.childern" layout="row" class="secondary-button-padding" ui-sref="{{child.state}}">
+                <i class="" flex="15"></i>
+                <p>{{child.name}}</p>
+            </md-list-item>
+        </div>
+        <md-tooltip ng-if="!$nav.expanded">{{parent.name}}</md-tooltip>
+        <md-divider ></md-divider>
+    </div>
+</md-list>
+
+

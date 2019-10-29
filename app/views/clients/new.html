@@ -1,0 +1,118 @@
+<md-card class="wrap_960">
+    <md-subheader>Bendra info</md-subheader>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select ng-model="client.type">
+                <option ng-value="'phy'">Fizinis</option>
+                <option ng-value="'com'">Juridinis</option>
+            </select>
+            <label>Tipas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label ng-if="client.type == 'phy'">Vardas Pavardė</label>
+            <label ng-if="client.type == 'com'">pavadinimas</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>kontaktinis asmuo</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>telfono numeris</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <input ng-if="client.type == 'phy'" type="date">
+            <input ng-if="client.type == 'com'">
+            <label ng-if="client.type == 'phy'">Gimimo data</label>
+            <label ng-if="client.type == 'com'">įmonės kodas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>e-paštas</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select ng-if="client.type == 'phy'">
+                <option>Vyras</option>
+                <option >Moteris</option>
+            </select>
+            <input ng-if="client.type == 'com'">
+            <label ng-if="client.type == 'phy'">lytis</label>
+            <label ng-if="client.type == 'com'">PVM mokėtojo kodas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>adresas pristatymui</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>Aktyvus</option>
+                <option >Neaktyvus</option>
+            </select>
+            <label>statusas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>adresas sąskaitai</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>Taip</option>
+                <option >Ne</option>
+            </select>
+            <label>pardavėjas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <input>
+            <label>magneto id</label>
+        </div>
+    </div>
+</md-card>
+<md-card class="wrap_960">
+    <md-subheader>Pardavimai</md-subheader>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>Jonas Jonaitis (1123)</option>
+                <option >Petras Petraitis (1107)</option>
+            </select>
+            <label>vadybininkas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>14 dienų atidėjimas</option>
+                <option >28 dienų atidėjimas</option>
+            </select>
+            <label>mokėjimo sąlygos</label>
+        </div>
+    </div>
+    <div layout-gt-sm="row" layout="column">
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>UAB 7Pack</option>
+                <option >UAB Pardavita</option>
+            </select>
+            <label>pardavėjas</label>
+        </div>
+        <div class="material_input_container" flex="50">
+            <select>
+                <option>Nėra</option>
+                <option>20 % ASG Nuolaida</option>
+            </select>
+            <label>Nuolaida</label>
+        </div>
+    </div>
+</md-card>
+<div layout="row" layout-align="end center" class="wrap_960">
+    <md-button class="md-raised md-primary">Išsaugoti</md-button>
+</div>

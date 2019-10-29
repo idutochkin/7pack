@@ -1,0 +1,9 @@
+<md-dialog style="min-width:75vw; min-height:75vh">
+  <md-toolbar layout="row" layout-align="space-between center">
+    <span class="md-padding">Naujas klientas</span>
+    <md-button layout="row" layout-align="center center" ng-click="closeDialog()">
+      <i class="material-icons">close</i>
+    </md-button>
+  </md-toolbar>
+  <md-dialog-content ng-include="'views/clients/new.html'"></md-dialog-content>
+</md-dialog>

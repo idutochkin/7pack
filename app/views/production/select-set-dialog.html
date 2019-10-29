@@ -1,0 +1,33 @@
+<md-toolbar layout="row" layout-align="end center">
+    <md-button layout="row" layout-align="center center" ng-click="closeDialog()">
+        <i class="material-icons">close</i>
+    </md-button>
+</md-toolbar>
+<div layout="column" layout-padding>
+    <div layout="row">
+        <div layout="column">
+            <div layout="row" layout-align="center center">Pirmoji diena</div>
+            <div layout="row" layout-align="center center" layout-margin>
+                <md-calendar ng-model="date" md-date-filter="filterDates"></md-calendar>
+            </div>
+        </div>
+        <div flex="10"></div>
+        <div flex="30" layout="column" layout-align="start start">
+            <div layout="column" layout-align="start start">
+                <div layout="row" layout-align="start center">Dienų skaičius</div>
+                <md-input-container>
+                    <input type="text" ng-model="daysAmount" aria-label="daysAmount" required>
+                </md-input-container>
+            </div>
+            <div layout="column" layout-align="start center">
+                <div layout="row" layout-align="start center">Rinkinys</div>
+                <md-select ng-model="selectedSet" aria-label="Set">
+                    <md-option ng-repeat="set in sets track by $index" ng-value="set">{{ set.Pavadinimas }}</md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+    <div layout="row" layout-align="center center">
+        <md-button class="md-raised md-primary" ng-click="addCalendarEntries()">ATNAUJINTI</md-button>
+    </div>
+</div>

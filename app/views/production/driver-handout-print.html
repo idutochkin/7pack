@@ -1,0 +1,92 @@
+<div style="max-width:1080px;">
+<table class="handout_table" ng-repeat="__driver in driversWithOrders" ng-if="__driver.orders.length != 0" id="{{__driver.idx}}">
+    <thead>
+        <tr>
+            <th colspan="14" class="handout_warn">
+                Šiame dokumente pateikiama konfidenciali informacija. Užpildytas ir pasirašytas dokumentas privalo būti grąžintas administracijai.
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">{{date}}</th>
+            <th colspan="3" class="align_right">Vairuotojas : </th>
+            <th class="align_left">{{__driver.driver.Vardas}} {{__driver.driver.Pavarde}}</th>
+            <th colspan="8" rowspan="2" style="text-transform:uppercase">
+                
+                    Jeigu matote, kad
+                    <strong>laiku nespėsite atvežti, būtina klientui nusiųsti sms.</strong>
+                    Ją reikia siųsti ir tada, kai vėluosite kelias min. kuo ankščiau informuosite, tuo geriau.
+               
+            </th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="align_right">Viso Krepšių : </th>
+            <th>{{__driver.count.bag}}</th>
+            <th colspan="2" class="align_right">Viso adresų : </th>
+            <th>{{__driver.count.address}}</th>
+        </tr>
+        <tr>
+            <th>Nr.</th>
+            <th>Vardas Pavardė</th>
+            <th>Miestas</th>
+            <th>Nuo</th>
+            <th>Iki</th>
+            <th>Adresas</th>
+            <th>PPD</th>
+            <th>A</th>
+            <th>Kodas</th>
+            <th>Telefonas</th>
+            <th style="width:20%">Pastabos</th>
+            <th>Vnk.</th>
+            <th>Grąžino</th>
+            <th>Be etiketės</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat = "ord in __driver.orders | orderBy : 'Eiliskumas' : false" ng-class-even="'hdt_even'" ng-class-odd="'hdt_odd'">
+            <th>{{$index + 1}}</th>
+            <th>{{ord.Vardas_Pavarde}}</th>
+            <th>{{ord.Miestas}}</th>
+            <th>{{ord.Laikas_Nuo | date : "HH:mm" }}</th>
+            <th>{{ord.Laikas_Iki | date : "HH:mm" }}</th>
+            <th>{{ord.Adresas}}</th>
+            <th>{{ord.PPD ? 'Taip' : 'Ne'}}</th>
+            <th>{{ord.Aukstas}}</th>
+            <th>{{ord.Kodas}}</th>
+            <th>{{ord.Telefonas}}</th>
+            <th>{{ord.Pastabos}}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="14">
+                <div class="divFooter footer " layout="row">
+                    <div flex="50" layout="row" layout-align="center center">
+                        <div layout="row" class="md-padding ">
+                            <span>Kurjeris</span>
+                            <div class="handout_underline">
+                                <span></span>
+                                <label>Parašas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex="50" layout="row" layout-align="center center">
+                        <div layout="row" class="md-padding  ">
+                            <span>Vyr. kurjeris / Vadybininkas</span>
+                            <div class="handout_underline">
+                                <span></span>
+                                <label>Vardas Pavardė parašas</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+</div>

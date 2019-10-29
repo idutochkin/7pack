@@ -1,0 +1,38 @@
+<md-dialog style="min-width:80vw;min-height:80vh">
+    <md-toolbar layout="row" layout-align="space-between center">
+        <span class="md-padding">Rinktis produktą</span>
+        <md-button layout="row" layout-align="center center" ng-click="close()">
+            <i class="material-icons">close</i>
+        </md-button>
+    </md-toolbar>
+    <md-dialog-content >
+        <div layout="row" layout-align="center center" class="md-padding">
+                <div  layout="row" layout-align="center center">
+                    <i class="material-icons" >search</i>
+                </div>
+                <input class="material_input" ng-change="change()" ng-model="searchInput"/>
+        </div>
+        <div layout-gt-sm="row" layout-wrap ng-if="!select">
+            <md-content flex="25" ng-repeat="set in categoryMenu" class="settings_menuItemWrap hover_teal" layout="column" md-ink-ripple ng-click="change()">
+                <icon layout="row" layout-align="center center">
+                    <i class="material-icons md-48">{{set.icon}}</i>
+                </icon>
+                <span>{{set.name}}</span>
+            </md-content>
+        </div>
+        <md-list ng-if="select">
+            <md-list-item class="md-3-line" ng-click="close()" ng-repeat="i in [1,2,3,4,5,6]">
+                <span class="md-padding">1157</span>
+                <img src="http://media.nola.com/food_impact/photo/10849134-large.jpg" class="md-avatar"  />         
+                <div class="md-list-item-text" layout="column">
+                    <h3>Kiaušinių ir saldžių bulvių keksiukai</h3>
+                    <p layout="row" layout-align="space-between center">
+                        <span>Gaminama</span>
+                        <span>300g</span>
+                    </p>
+                    <p>Patiekalas</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-dialog-content>
+</md-dialog>

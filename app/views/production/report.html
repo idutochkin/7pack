@@ -1,0 +1,70 @@
+<div layout="column" ng-cloak>
+    <div layout="row" layout-align="start center">
+        <md-button ng-click="alterTabs.set(0)" ng-class="alterTabs.current == 0 ? 'md-raised md-primary' : ''">GAMYBOS ATASKAITA</md-button>
+        <md-button ng-click="alterTabs.set(1)" ng-class="alterTabs.current == 1 ? 'md-raised md-primary' : ''">PDF ATASKAITOS</md-button>
+    </div>
+    <md-card>
+        <div label="GAMYBOS ATASKAITA" ng-show="alterTabs.current == 0">
+			<div layout="column" layout-fill>
+			  <div
+				flex="100"
+				layout="row"
+				layout-align="center center"
+				layout-margin ng-if="!report.isLoaded">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			  </div>
+			  <md-content>
+				<md-card ng-if="report.isLoaded" style="margin:0">
+				  <md-card-title>GAMYBOS ATASKAITA</md-card-title>
+				  <md-card-content layout="row">
+					<md-datepicker
+					  ng-model="report.date" ng-change="report.getSets()" md-max-date="report.maxDate" layout-margin
+					  md-date-filter="report.onlyWeekdaysPredicate">
+					</md-datepicker>
+					<table class="ingredients_table shrink" flex="30" layout-margin>
+					  <thead>
+						<tr>
+						  <th>Rinkinys</th>
+						  <th>Kiekis</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr ng-repeat="set in report.sets">
+						  <th>{{ set.Rinkinys }}</th>
+						  <th>{{ set.Kiekis }}</th>
+						</tr>
+					  </tbody>
+					</table>
+					<div
+					  layout="column"
+					  layout-align="start center">
+					  <md-button
+						ng-click="report.generate()"
+						class="md-raised md-primary"
+						ng-disabled="report.generating">
+						GENERUOTI
+					  </md-button>
+					  <md-progress-circular
+						style="margin-top: 10px;"
+						md-mode="indeterminate"
+						ng-if="report.generating">
+					  </md-progress-circular>
+					</div>
+				  </md-card-content>
+				</md-card>
+			  </md-content>
+			</div>
+		</div>		
+        <div label="PDF ATASKAITOS" ng-show="alterTabs.current == 1">
+			  <md-content>
+				<md-card style="margin:0">
+				  <md-card-title>PDF ATASKAITOS</md-card-title>
+				  <md-card-content layout="row" ng-repeat="report in listReports">
+					<a href="{{report.path}}" target="_blank">{{report.name}}</a> - (date created: {{report.date}})
+				  </md-card-content>
+				</md-card>
+			  </md-content>
+			</div>
+        </div>
+    </md-card>
+</div>

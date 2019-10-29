@@ -1,0 +1,43 @@
+<div style="width : 65vw ; height : 75vh">
+    <div layout="row" class="md-padding" layout-align="space-between center">
+        <input class="modalSearchInput" ng-model="searchText" ng-change="search(searchText)" placeholder="Ieškokite žaliavos ar pusgaminio"
+            flex="50" />
+        <div>
+            <md-button class="md-raised md-primary" flex ng-disabled="!canGoBack" ng-click="move('Back')">←</md-button>
+            <md-button class="md-raised md-primary" flex ng-disabled="!canGoForward" ng-click="move('Forward')">→</md-button>
+            <md-button class="md-raised md-primary" flex ng-click="close(null)">Atšaukti</md-button>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <md-tabs>
+        <md-tab label="Žaliavos" ng-click="selectType('materials')"></md-tab>
+        <md-tab label="Pusgaminiai" ng-click="selectType('products')"></md-tab>
+    </md-tabs>
+    <md-list>
+        <md-list-item class="md-3-line" ng-click="close(mat)" ng-repeat="mat in materials | limitTo : limit : start track by $index">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{mat.ID}} | {{mat.Pavadinimas}}</h3>
+                <p layout="row" layout-align="space-between center">
+                    <span>{{mat.Grupe}}</span>
+                </p>
+                <div layout="row" layout-align="start center">
+                    <div class="left-chart" style="margin-right: 10px;">
+                        <div class="start"></div>
+                        <div class="mid"></div>
+                        <div class="end"></div>
+                        <div class="rie" ng-style="mat.leftChartData.rie"></div>
+                        <div class="ang" ng-style="mat.leftChartData.ang"></div>
+                        <div class="bal" ng-style="mat.leftChartData.bal"></div>
+                    </div>
+                    <div class="right-chart" style="margin-right: 20px;">
+                        <div class="start"></div>
+                        <div class="end"></div>
+                        <div class="aug" ng-style="mat.rightChartData.aug"></div>
+                        <div class="gyv" ng-style="mat.rightChartData.gyv"></div>
+                    </div>
+                    <span>{{mat.Kcal}} kcal</span>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

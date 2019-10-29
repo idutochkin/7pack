@@ -1,0 +1,55 @@
+<md-card layout="row" layout-fill>
+    <div flex="80">
+        <div layout-fill layout="row" layout-align="center center" ng-show="loading">
+            <md-progress-circular></md-progress-circular>
+        </div>
+        <md-content layout-fill>
+            <md-list class="md-padding" ng-hide="loading">
+                <md-list-item ng-if="sets.length == 0" layout="row" layout-align="center center">
+                    <p>Rinkinių pasirintai dienai nėra</p>
+                </md-list-item>
+                <md-list-item  ng-repeat="i in sets">
+                    <div flex layout="row">
+                        <div flex="40">{{i.Pavadinimas}}</div>
+                        <div flex="40">{{i.Rinkinys}}</div>
+                        <div flex="20">
+                            <input placeholder="Kiekis" ng-model="i.qty" type="number"/>
+                        </div>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+    <md-divider></md-divider>
+    <div flex layout="column" class="md-padding">
+        <span style="text-align:center" class="md-title">{{calendar.display}}</span>
+        <div layout="row"  layout-align="center center" class="md-padding">
+            <md-datepicker ng-model="calendar.date" ng-change="calendar.change()"></md-datepicker>
+        </div>
+        <div layout="row" >
+            <md-button layout="row" layout-align="center center" flex ng-click="calendar.go('prev')">
+                <i class="material-icons">
+                    skip_previous
+                </i>
+            </md-button>
+            <md-button layout="row" layout-align="center center" flex ng-click="calendar.go('next')">
+                <i class="material-icons">
+                    skip_next
+                </i>
+            </md-button>
+        </div>
+        <md-button layout="row" layout-align="start center" class="md-raised md-primary" ng-click="printStickers()">
+            <i class="material-icons" flex="30">
+                print
+            </i>
+            <div>Lipdukai</div>
+        </md-button>
+        <md-button layout="row" layout-align="start center" class="md-raised md-primary">
+            <i class="material-icons" flex="30">
+                print
+            </i>
+            <div>Gamybos ataskaita</div>
+        </md-button>
+    </div>
+</md-card>

@@ -1,0 +1,88 @@
+<md-dialog class="modal_fs_95" >
+<md-toolbar class="md-padding" layout="row" layout-align="center center">
+    <form layout="column" ng-submit="inputChange(bInput)">
+        <input placeholder="barcode" ng-model="bInput" id="barcodeInput" ng-change="inputChange(bInput)"/>
+    </form>
+</md-toolbar>
+<md-content  layout="column">
+    <div layout="row" layout-align="space-between center" class="md-padding">
+        <!-- <form layout="column" ng-submit="playSound(bInput)">
+            <input placeholder="barcode" ng-model="bInput" id="barcodeInput"/>
+        </form> -->
+        <div>
+            <h1>Liko : {{count}}</h1>
+        </div>
+        <h4>{{driver.Vardas}} {{driver.Pavarde}}</h4>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-align="center center" class="md-padding" ng-hide="orders.length != 0">
+        <h3>Krepšių nėra</h3>
+    </div>
+    <table class="ingredients_table shrink" ng-show="orders.length != 0">
+        <thead>
+            <tr>
+                <th class="pointer" ng-click="filter.change('barcode')" >
+                    <span>Barcode</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'barcode'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('name')" >
+                    <span>Vardas Pavardė</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'name'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('complect')" >
+                    <span>Rinkinys</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'complect'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('city')" >
+                    <span>Miestas</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'city'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th>Nuo</th>
+                <th>Iki</th>
+                <th class="pointer" ng-click="filter.change('address')" >
+                    <span>Adresas</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'address'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('dateUploaded')" >
+                    <span>Įkelta</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'dateUploaded'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('dateWent')" >
+                    <span>Išvežta</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'dateWent'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('dateDelivered')" >
+                    <span>Pristatyta</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'dateDelivered'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('dateReturned')" >
+                    <span>Grąžinta</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'dateReturned'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+                <th class="pointer" ng-click="filter.change('dateOfDelivery')" >
+                    <span>Pristatytymo diena</span>
+                    <i class="material-icons md-14 filter-icon" ng-if="filter.col == 'dateOfDelivery'">{{filter.dir == 'asc' ? 'arrow_drop_down' : 'arrow_drop_up'}}</i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="b in orders | orderBy : 'Isvezta' : true" ng-class="b.Isvezta ? 'bag_checked' : ''">
+                <th>{{b.Barcode}}</th>
+                <th>{{b.Vardas_Pavarde}}</th>
+                <th>{{b.Planas}}</th>
+                <th>{{b.Miestas}}</th>
+                <th>{{b.Laikas_Nuo | date : "HH:mm" : "+0400"}}</th>
+                <th>{{b.Laikas_Iki | date : "HH:mm" : "+0400"}}</th>
+                <th>{{b.Adresas}}</th>
+                <th>{{b.Ikelta | date : "yyyy-MM-dd HH:mm" : "+0400"}}</th>
+                <th>{{b.Isvezta | date : "yyyy-MM-dd HH:mm" : "+0400"}}</th>
+                <th>{{b.Pristatyta | date : "yyyy-MM-dd HH:mm" : "+0400"}}</th>
+                <th>{{b.Grazinta | date : "yyyy-MM-dd HH:mm" : "+0400"}}</th>
+                <th>{{b.Pristatymo_Diena | date : "yyyy-MM-dd" : ""+0400}}</th>
+            </tr>
+        </tbody>
+    </table>
+</md-content> 
+<audio src="audio/barcode-ok.mp3" id="audio_ok"></audio>
+<audio src="audio/barcode-err.mp3" id="audio_err"></audio>
+</md-dialog>

@@ -1,0 +1,30 @@
+<md-toolbar layout="row" layout-align="center center" style="min-width:35vw">
+    Vairuotojo atmintinės spausdinimas
+</md-toolbar>
+<md-content layout="column">
+    <div class="md-padding" layout="column" layout-align="center center">
+        <label>{{text}}</label>
+        
+        <md-select ng-model = "selected.driver" style="min-width: 200px;" ng-change="change()"  ng-disabled="allDrivers">
+            <label >vairuotojas</label>
+            <md-option ng-repeat="driver in drivers | orderBy : 'Pavarde' : false" ng-value="driver.ID">{{driver.Pavarde}} {{driver.Vardas}}</md-option>
+        </md-select>
+        <div class="md-padding">
+            <md-checkbox ng-model="allDrivers" ng-change="cbChange()">
+                Visi vairuotojai
+            </md-checkbox>
+        </div>
+        <md-datepicker ng-model="selected.date" ng-change="change()">
+            <input type="text"/>
+        </md-datepicker>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-align="space-between center">
+        <md-button ng-click="cancel()">Atšaukti</md-button>
+        <div>
+                <md-button class="md-raised md-secondary" ng-disabled="!next" ng-click="goNext('pdf')">pdf</md-button>
+                <md-button class="md-raised md-primary" ng-disabled="!next" ng-click="goNext('print')">Spausdinti</md-button>
+        </div>
+        
+    </div>
+</md-content>

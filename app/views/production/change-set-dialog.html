@@ -1,0 +1,21 @@
+<md-toolbar layout="row" layout-align="end center">
+    <md-button layout="row" layout-align="center center" ng-click="closeDialog()">
+        <i class="material-icons">close</i>
+    </md-button>
+</md-toolbar>
+<div layout="column" layout-padding>
+    <div layout="column" layout-align="start center">
+        <div layout="row" layout-align="start center">Rinkinys</div>
+        <md-select ng-model="selectedSet" aria-label="Set">
+            <md-option ng-repeat="set in sets track by $index" ng-value="set">{{ set.Pavadinimas }}</md-option>
+        </md-select>
+    </div>
+    <div layout="row">
+        <div layout="row" layout-align="center center">
+            <md-button ng-click="deleteCalendarEntries()">Trinti</md-button>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="updateCalendarEntries()">Irašyti</md-button>
+        </div>
+    </div>
+</div>

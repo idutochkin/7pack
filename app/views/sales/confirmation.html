@@ -1,0 +1,90 @@
+<div  layout="column" layout-fill>
+        <md-toolbar layout="row" layout-align="space-between center">
+            <div layout="row">
+                <md-button layout="row" layout-align="center center" ui-sref="sales.create">
+                    <i class="material-icons">arrow_back</i>
+                </md-button>
+                <md-button layout="row" layout-align="center center" ng-click="print()">
+                    <i class="material-icons">print</i>
+                </md-button>
+                <md-button layout="row" layout-align="center center" ng-click="export()">
+                    <i class="material-icons">file_download</i>
+                </md-button>
+                <md-button layout="row" layout-align="center center" ng-click="null">
+                    <i class="material-icons">mail</i>
+                </md-button>
+            </div>
+            <md-button layout="row" layout-align="center center" ui-sref="sales.details({id:1234})">
+                <i class="material-icons">done</i>
+            </md-button>
+        </md-toolbar>
+        <div class="datasheet_wrap" flex="100">
+            <div class="datasheet_paper" layout="column" id="datasheet">
+                <div layout="row" layout-align="center center">
+                    <h2>Užsakymo patvirtinimas</h2>
+                </div>
+                <div layout="row" layout-align="start stretch">
+                    <div>
+                        <img src="images/7pack_grey.png" class="datasheet_logo">
+                    </div>
+                    <div class="datasheet_header_data" layout="column" layout-align="start start">
+                       <strong>Užsakymo numeris:</strong>
+                       <strong>Kliento kodas:</strong>
+                       <strong>Klientas:</strong>
+                       <strong>Pastabos:</strong>
+                    </div>
+                    <div class="datasheet_header_data" layout="column" layout-align="start start">
+                        <span>11152</span>
+                        <span>2623154</span>
+                        <span>Gediminas Valaitis</span>
+                        <span>-</span>
+                    </div>  
+                    <div class="datasheet_header_data" layout="column" layout-align="start start">
+                        <strong>Adresas sąskaitai:</strong>
+                        <strong>Mokėjimo tipas:</strong>
+                        <strong>Mokėjimo sąlygos:</strong>
+                    </div>
+                    <div class="datasheet_header_data" layout="column" layout-align="start start">
+                        <span>Laisvės pr. 100, Vilnius</span>
+                        <span>Pavedimu</span>
+                        <span>15 d. atidėjimas</span>
+                    </div> 
+                </div>
+                <table class="material_table">
+                    <thead>
+                        <tr>
+                            <th>Produkto Tipas</th>
+                            <th>Produktas</th>
+                            <th>Kiekis</th>
+                            <th>Kaina Vnt.</th>
+                            <th>Suma</th>
+                            <th>Nuolaida</th>
+                            <th>Galutinė suma</th>
+                            <th>Pirma diena</th>
+                            <th>Pristatymo adresas</th>
+                            <th>Kliento Kontaktas</th>
+                            <th>Pastabos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in [1,2,3,4]">
+                            <th>Patiekalas</th>
+                            <th>Sumuštinis su lašisa</th>
+                            <th>7</th>
+                            <th>1,99 Eur</th>
+                            <th>13,93 Eur</th>
+                            <th>-</th>
+                            <th>13,93 Eur</th>
+                            <th>2017-12-01</th>
+                            <th>Laisvės pr. 100</th>
+                            <th>+37069998877</th>
+                            <th>-</th>
+                    </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+    
+    

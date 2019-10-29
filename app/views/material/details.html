@@ -1,0 +1,110 @@
+<div layout-fill layout="row" layout-align="center center" ng-show="loading">
+  <md-progress-circular></md-progress-circular>
+</div>
+
+<div layout-gt-md="row" layout="column" ng-show="!loading">
+  <div layout="column" layout-fill>
+    <md-card class="elm-margin">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{material.Pavadinimas}}</span>
+          <span class="md-subhead">{{group(material.GrupesID)}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media">
+            <img ng-if="img" ng-src="{{img}}" ng-click="openPhotoModal()" />
+          </div>
+        </md-card-title-media>
+
+      </md-card-title>
+      <md-card-content layout="column">
+        <div layout="row">
+          <div layout="column" flex="50">
+            <div class="text_2line">
+              <span>{{unit(material.MatavimoVntID)}}</span>
+              <p>Bazinis vienetas</p>
+            </div>
+            <div class="text_2line">
+              <span>{{material.Augaline}}%</span>
+              <p>Augalinė kilmė</p>
+            </div>
+          </div>
+          <div layout="column" flex="50">
+            <div class="text_2line">
+              <span>{{material.Kcal}}</span>
+              <p>kcal (100g)</p>
+            </div>
+            <div class="text_2line">
+              <span>{{material.Gyvuline}}%</span>
+              <p>Gyvulinė kilmė</p>
+            </div>
+          </div>
+        </div>
+        <div class="text_2line">
+          <span>{{material.Alergenas}}</span>
+          <p>Alergenai</p>
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button" ui-sref="{{uiLink}}">
+          <i class="material-icons">edit</i>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+    <md-card class="elm-margin">
+      <div layout-gt-sm="row" layout="row">
+        <div layout="column" flex="50">
+          <strong class="md-padding">Mikroelementai (100g)</strong>
+          <div class="md-padding" layout="row">
+            <span class="uppercase" flex="75">Riebalai</span>
+            <span flex="25">{{material.Riebalai}}g</span>
+          </div>
+          <div layout="row" class="md-padding">
+            <span class="uppercase" flex="75">Angliavandeniai</span>
+            <span flex="25">{{material.Angliavandeniai}}g</span>
+          </div>
+          <div class="md-padding" layout="row">
+            <span class="uppercase" flex="75">Baltymai</span>
+            <span flex="25">{{material.Baltymai}}g</span>
+          </div>
+        </div>
+        <div layout="column" flex="50" layout-align="start center">
+          <div zingchart id="microChart" zc-json="microChartData" zc-height="200" zc-width="200"></div>
+        </div>
+	  </div>
+      <div layout-gt-sm="row" layout="row">
+        <div layout="column" flex="50">
+          <strong class="md-padding">Makroelementai (100g)</strong>
+          <div layout="row" class="md-padding">
+            <span class="uppercase" flex="75">Cukrus</span>
+            <span flex="25">{{material.Cukrus}}g</span>
+          </div>
+          <div class="md-padding" layout="row">
+            <span class="uppercase" flex="75">Druska</span>
+            <span flex="25">{{material.Druska}}g</span>
+          </div>
+          <div class="md-padding" layout="row">
+            <span class="uppercase" flex="75">Skaidulos</span>
+            <span flex="25">{{material.Skaidulos}}g</span>
+          </div>
+		</div>
+        <div layout="column" flex="50" layout-align="start center">
+          <div zingchart id="macroChart" zc-json="macroChartData" zc-height="200" zc-width="200"></div>
+        </div>
+	  </div>
+    </md-card>
+  </div>
+  <md-card layout-fill class="elm-margin" ng-controller="MaterialDetailsCtrl">
+    <md-subheader>Naudojama receptuose ({{PatiekolasLength}})</md-subheader>
+	<md-card-actions layout="row" layout-align="start center">
+		<label>Select tipas -&nbsp;&nbsp;</label>
+		<select ng-model="tipas" ng-change="search(tipas)">
+			<option value="0">Rodyti visus</option>
+			<option value="1">Patiekalas</option>
+			<option value="2">Pusgaminis</option>
+		</select>
+	</md-card-actions>
+    <md-divider></md-divider>
+    <tree family="treePatiekolas" class="treePatiekolas"></tree>
+  </md-card>
+</div>

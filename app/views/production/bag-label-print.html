@@ -1,0 +1,98 @@
+<div layout="row">
+  <table flex="30" style="width:100%">
+    <tbody>
+      <tr flex ng-repeat="bag in ::bags track by $index" layout="column" style="page-break-inside: avoid;" ng-if="($index % 2) == 0">
+        <th layout="column" class="bag-label noBreak" style="page-break-inside: avoid">
+          <div class="content" layout="column">
+            <div class="status" flex="15" layout="row" layout-align="space-between center">
+              <div>{{::bag.Vienkartinis}}</div>
+              <div>{{::bag.Ivadinis}}</div>
+            </div>
+            <div class="first" layout="row" layout-align="space-between start">
+              <div flex="80" layout="row" layout-align="space-between start">
+                <div layout="column" layout-align="start start">
+                  <div class="address">{{::bag.Adresas | limitTo : bag.AdresasDelimiter}}</div>
+                  <div class="address2">{{::bag.Adresas | limitTo : bag.Adresas.length : bag.AdresasDelimiter}}</div>
+                </div>
+                <div class="code" >{{::bag.Miestas}}</div>
+              </div>
+              <div class="courrier" flex="20">{{::bag.Vairuotojas}}</div>
+            </div>
+            <div class="second" layout="row" layout-align="space-between center">
+              <div flex="80" layout="row" layout-align="space-between center">
+                <div class="name" flex="80" layout="row" layout-align="space-between center">{{bag.Vardas}} {{bag.Pavarde | limitTo:1}}.</div>
+                <div class="set uc">{{::bag.Planas}}</div>
+              </div>
+            </div>
+            <div class="fourth" layout="row">
+              <div flex="80" layout="row" layout-align="space-between center">
+                <div class="time" layout="column" layout-align="start end">
+                  <div>NUO:{{::bag.Laikas_Nuo | date : "yyyy-MM-dd HH:mm"}}</div>
+                  <div>IKI:{{::bag.Laikas_Iki | date : "yyyy-MM-dd HH:mm"}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="sixth" layout="row" style="text-align: left;">
+              <div layout="row" flex="80">
+                Šaltkrepšis bei šaldymo elementas yra UAB 7Pack nuosavybė. Siekdami išlaikyti aukštą
+                paslaugos kokybę maloniai prašome juos grąžinti laiku (kartu su etikete). Įmonė pasilieka teisę už
+                prarastą inventorių pareikalauti kompensacijos. Su mumis susisiekti galite:<br>+37066353533 | info@7pack.lt
+              </div>
+            </div>
+            <div class="barcodeWrapper">
+              <img ng-src="{{::barcode(bag.Barcode)}}">
+            </div>
+          </div>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  <table flex="30" style="width:100%">
+    <tbody>
+      <tr flex ng-repeat="bag in ::bags track by $index" layout="column" style="page-break-inside: avoid;" ng-if="$index % 2">
+        <th layout="column" class="bag-label noBreak" style="page-break-inside: avoid">
+          <div class="content" layout="column">
+            <div class="status" flex="15" layout="row" layout-align="space-between center">
+              <div>{{::bag.Vienkartinis}}</div>
+              <div>{{::bag.Ivadinis}}</div>
+            </div>
+            <div class="first" layout="row" layout-align="space-between start">
+              <div flex="80" layout="row" layout-align="space-between start">
+                <div layout="column" layout-align="start start">
+                  <div class="address">{{::bag.Adresas | limitTo : bag.AdresasDelimiter}}</div>
+                  <div class="address2">{{::bag.Adresas | limitTo : bag.Adresas.length : bag.AdresasDelimiter}}</div>
+                </div>
+                <div class="code" >{{::bag.Miestas}}</div>
+              </div>
+              <div class="courrier" flex="20">{{::bag.Vairuotojas}}</div>
+            </div>
+            <div class="second" layout="row" layout-align="space-between center">
+              <div flex="80" layout="row" layout-align="space-between center">
+                <div class="name" flex="80" layout="row" layout-align="space-between center">{{bag.Vardas}} {{bag.Pavarde | limitTo:1}}.</div>
+                <div class="set uc">{{::bag.Planas}}</div>
+              </div>
+            </div>
+            <div class="fourth" layout="row">
+              <div flex="80" layout="row" layout-align="space-between center">
+                <div class="time" layout="column" layout-align="start end">
+                  <div>NUO:{{::bag.Laikas_Nuo | date : "yyyy-MM-dd HH:mm"}}</div>
+                  <div>IKI:{{::bag.Laikas_Iki | date : "yyyy-MM-dd HH:mm"}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="sixth" layout="row" style="text-align: left;">
+              <div layout="row" flex="80">
+                Šaltkrepšis bei šaldymo elementas yra UAB 7Pack nuosavybė. Siekdami išlaikyti aukštą
+                paslaugos kokybę maloniai prašome juos grąžinti laiku (kartu su etikete). Įmonė pasilieka teisę už
+                prarastą inventorių pareikalauti kompensacijos. Su mumis susisiekti galite:<br>+37066353533 | info@7pack.lt
+              </div>
+            </div>
+            <div class="barcodeWrapper">
+              <img ng-src="{{::barcode(bag.Barcode)}}">
+            </div>
+          </div>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

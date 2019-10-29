@@ -1,0 +1,15 @@
+<div class="gallery_wrap" layout="column"> 
+    <img class="gallery_image" ng-src="{{images[current]}}"/>
+    <div layout="row" layout-align="center center">
+        <md-button layout="row" layout-align="center center" ng-disabled="!images[current - 1]" ng-click="change(-1)">
+            <i class="material-icons">arrow_back</i>
+        </md-button>
+        <span>
+            {{current + 1}} / {{images.length}}
+        </span>
+        <md-button layout="row" layout-align="center center" ng-disabled="!images[current + 1]" ng-click="change(1)">
+            <i class="material-icons">arrow_forward</i>
+        </md-button>
+    </div>
+    
+</div>

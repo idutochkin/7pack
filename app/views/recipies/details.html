@@ -1,0 +1,405 @@
+<div layout-fill layout="column" layout-align="center center" ng-show="loading" class="md-padding">
+  <md-progress-circular></md-progress-circular>
+</div>
+
+<div layout="column" ng-hide="loading">
+  <div layout="column" layout-gt-md="row">
+    <md-card flex>
+      <md-tabs md-dynamic-height md-selected="currentTabId">
+        <md-tab label="Statusas" layout="column">
+          <div>
+            <div layout="column" class="md-padding">
+              <div class="text_2line padding-5">
+                <strong ng-if="!$m.editable">{{product.ID}} | {{product.Pavadinimas}}</strong>
+                <input class="material_input" ng-if="$m.editable" ng-model="product.Pavadinimas">
+                <p>Pavadinimas</p>
+              </div>
+              <div layout-gt-md="row" layout="column">
+                <div class="text_2line padding-5" flex="50">
+                  <span ng-if="!$m.editable">{{product.type.Tipo_Pavadinimas}}</span>
+                  <select class="material_input" ng-if="$m.editable" ng-model="product.Tipas">
+                    <option ng-repeat="t in types" ng-value="t.ID">{{t.Tipo_Pavadinimas}}</option>
+                  </select>
+                  <p>tipas</p>
+                </div>
+                <div class="text_2line padding-5" flex="50">
+                  <span ng-if="!$m.editable">{{product.status.Statuso_Pavadinimas}}</span>
+                  <select class="material_input" ng-if="$m.editable" ng-model="product.Statusas">
+                    <option ng-repeat="st in statuses" ng-value="st.ID">{{st.Statuso_Pavadinimas}}</option>
+                  </select>
+                  <p>Statusas</p>
+                </div>
+              </div>
+              <div layout-gt-md="row" layout="column">
+                <div class="text_2line padding-5" flex="50">
+                  <span>{{product.Sukurtas | date : "yyyy-MM-dd HH:mm"}}</span>
+                  <p>modifikuota</p>
+                </div>
+                <div class="text_2line padding-5" flex="50">
+                  <span>Gediminas Valaitis | 1124</span>
+                  <p>modifikavo</p>
+                </div>
+              </div>
+            </div>
+            <md-subheader>
+              Logas
+            </md-subheader>
+            <md-list>
+              <md-list-item>
+                <p>Nėra įrašų</p>
+                <p class="md-secondary">-</p>
+                <md-divider></md-divider>
+              </md-list-item>
+              <md-list-item ng-click="showLogModal()" ng-disabled="true">
+                <p>Show more</p>
+
+                <md-divider></md-divider>
+              </md-list-item>
+            </md-list>
+
+            <md-button ui-sref="recipieData.dataSheet({id:1234})">Kalkuliacine kortelė</md-button>
+
+          </div>
+        </md-tab>
+        <md-tab label="Parametrai">
+          <div layout-gt-md="row" layout="column">
+            <div layout="column" flex="50">
+              <md-subheader>Patiekalo sudėtingumas</md-subheader>
+              <div layout="row" layout-align="center center" class="md-padding">
+                <md-slider-container flex>
+                  <md-slider flex min="0" max="5" ng-model="product.Sudetingumas" aria-label="red" id="red-slider">
+                  </md-slider>
+                  <md-input-container>
+                    <input flex type="number" ng-model="product.Sudetingumas" aria-label="red" aria-controls="red-slider">
+                  </md-input-container>
+                </md-slider-container>
+              </div>
+              <md-subheader>Laikymo sąlygos</md-subheader>
+              <div layout="row" layout-align="space-around center">
+                <div layout="column" class="indicator_wrap">
+                  <span ng-if="!$m.editable">{{product.storage.MinTemp}} °C</span>
+                  <input type="number" class="material_input minimise" ng-if="$m.editable" ng-model="product.storage.MinTemp">
+                  <p>Min temp</p>
+                </div>
+                <div layout="column" class="indicator_wrap">
+                  <span ng-if="!$m.editable">{{product.storage.MaxTemp}} °C</span>
+                  <input type="number" class="material_input minimise" ng-if="$m.editable" ng-model="product.storage.MaxTemp">
+                  <p>Max temp</p>
+                </div>
+                <div layout="column" class="indicator_wrap">
+                  <span ng-if="!$m.editable">{{product.storage.Trukme}} h</span>
+                  <input type="number" class="material_input minimise" ng-if="$m.editable" ng-model="product.storage.Trukme">
+                  <p>Trukmė</p>
+                </div>
+              </div>
+              <md-subheader>Konvertavimas</md-subheader>
+              <div class="md-padding">
+                <div layout="row" layout-align="space-between center" ng-repeat="i in [1]">
+                  <select placeholder="Matavimo vnt." class="material_input">
+                    <option>Kilogramai</option>
+                  </select>
+                  <input placeholder="Dydis" class="material_input">
+                  <md-button class="md-icon-button">
+                    <i class="material-icons">add</i>
+                  </md-button>
+                </div>
+              </div>
+              <md-subheader>
+                <div layout="row" layout-align="space-between center">
+                  <span>Tara</span>
+                  <div>
+                    <md-button class="md-icon-button" ng-click="showTareModal()">
+                      <i class="material-icons">edit</i>
+                    </md-button>
+                  </div>
+
+                </div>
+              </md-subheader>
+              <table class="material_table">
+                <thead>
+                  <tr>
+                    <th>KODAS</th>
+                    <th>PAVADINIMAS</th>
+                    <th>KIEKIS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>123</th>
+                    <th>Micro bowl 370ml</th>
+                    <th>285</th>
+                  </tr>
+                  <tr>
+                    <th>225</th>
+                    <th>Micro bowl 470ml</th>
+                    <th>311</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <md-divider></md-divider>
+            <div layout="column" flex="50">
+              <div layout="row" layout-align="space-around center" class="md-padding">
+                <div class="text_2line padding-5" flex="33" layout="column" layout-align="center center">
+                  <span ng-if="!$m.editable">{{product.unit.Pavadinimas}} ({{product.unit.Kodas}})</span>
+                  <select ng-if="$m.editable" class="material_input " ng-model="product.MatavimoVntID">
+                    <option ng-repeat="unit in units" ng-value="unit.ID">{{unit.Pavadinimas}} ({{unit.Kodas}})</option>
+                  </select>
+                  <p>matavimo tipas</p>
+                </div>
+                <div class="text_2line padding-5" flex="33" layout="column" layout-align="center center">
+                  <span>{{calculations.brutto}}</span>
+                  <p>Išeiga</p>
+                </div>
+                <div class="text_2line padding-5" flex="33" layout="column" layout-align="center center">
+                  <span>{{calculations.kcal}}</span>
+                  <p>kcal</p>
+                </div>
+              </div>
+              <div layout-gt-lg="row" layout-align-gt-lg="space-around center" layout="column" layout-align="center center">
+                <!-- <div id="chart_main_art"></div> -->
+                <div zingchart id="myChart" zc-json="chartData" zc-height="350" zc-width="350"></div>
+                <div layout="column" layout-align="space-between center">
+                  <table class="details_table">
+                    <tbody>
+                      <tr>
+                        <th>Skaidulos</th>
+                        <th>{{calculations.skaid}}</th>
+                      </tr>
+                      <tr>
+                        <th>Druska</th>
+                        <th>{{calculations.druska}}</th>
+                      </tr>
+                      <tr>
+                        <th>Cukrūs</th>
+                        <th>{{calculations.cukrus}}</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="details_table">
+                    <tbody>
+                      <tr>
+                        <th>Gyvulinė</th>
+                        <th>{{calculations.gyv}}%</th>
+                      </tr>
+                      <tr>
+                        <th>Augalinė</th>
+                        <th>{{calculations.aug}}%</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </md-tab>
+        <md-tab label="Media">
+          <div layout-gt-md="row" layout="column">
+            <div layout="column" flex="50">
+              <md-subheader>Aprašymas</md-subheader>
+              <span ng-if="!$m.editable" class="md-padding">{{product.sticker.Aprasymas}}</span>
+              <textarea ng-if="$m.editable" ng-model="product.sticker.Aprasymas"></textarea>
+              <md-subheader>Patiekalo požymiai</md-subheader>
+              <div layout="row" layout-align="space-between start" class="md-padding">
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_hot.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Sildomas"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Sildomas ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Šildomas patiekalas</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_veg.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Skaidulinis"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Skaidulinis ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Ląstelienos šaltinis</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_prot.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Baltymai"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Baltymai ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Baltymų šaltinis</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_vegan.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Veganinis"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Veganinis ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Tinka veganams</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_heart.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Vegetarinis"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Vegetarinis ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Tinka vegetarams</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_milk.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Be_pieno"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Be_pieno ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">be pieno produktų</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img src="images/icons/attr_sug.png" class="attribute_image" />
+                  <input class="padding-5" ng-if="$m.editable" type="checkbox" ng-model="product.sticker.Be_Cukraus"></input>
+                  <i class="material-icons" ng-if="!$m.editable">{{product.sticker.Be_Cukraus ? 'check_box' : 'check_box_outline_blank'}}</i>
+                  <span class="text_label">Be pridėtinio cukraus</span>
+                </div>
+              </div>
+            </div>
+            <md-divider></md-divider>
+            <div flex="50" layout="column" layout-align="start center">
+
+              <md-button layout="row" layout-align="center center" type="file" ng-click="openFileUploader()">
+                <i class="material-icons">add_a_photo</i>
+              </md-button>
+
+
+              <img ng-if="product.images[0]" class="recipie_image" ng-click="openGallery()" ng-src="{{product.images[0]}}">
+            </div>
+          </div>
+        </md-tab>
+        <md-tab label="technologija">
+          <md-tabs md-dynamic-height flex>
+            <md-tab label="Sudedamosios dalys" layout="column">
+              <table class="ingredients_table ">
+                <thead class="">
+                  <tr>
+                    <th rowspan="2">Pavadinimas</th>
+                    <th colspan="7">Parametrai</th>
+                    <th colspan="3">Micro</th>
+                    <th colspan="3">Macro</th>
+                    <th colspan="2">Kilme</th>
+                    <th rowspan="2"></th>
+                  </tr>
+                  <tr class="thead_big">
+                    <th class="text_vertical limited_width">Mato vnt.</th>
+                    <th class="text_vertical limited_width">Max1</th>
+                    <th class="text_vertical limited_width">Netto</th>
+                    <th class="text_vertical limited_width">Praradimas %</th>
+                    <th class="text_vertical limited_width">Išeiga</th>
+                    <th class="text_vertical limited_width">Praradimas kcal</th>
+                    <th class="text_vertical limited_width">kcal</th>
+                    <th class="text_vertical limited_width">Angl.</th>
+                    <th class="text_vertical limited_width">Balt.</th>
+                    <th class="text_vertical limited_width">Rieb.</th>
+                    <th class="text_vertical limited_width">Cukrus</th>
+                    <th class="text_vertical limited_width">Druska</th>
+                    <th class="text_vertical limited_width">Skaidulos</th>
+                    <th class="text_vertical limited_width">Augalinė</th>
+                    <th class="text_vertical limited_width">Gyvulinė</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="i in product.calculation">
+                    <th class="indicator_semi">
+                      <a ng-click="openMaterial(i)" href="">{{i.ZaliavosID}} | {{i.Pavadinimas}}</a>
+                    </th>
+                    <th>{{i.Kodas}}</th>
+                    <th>
+                      <input type="checkbox" ng-if="calcEdit.enabled" class="material_checkbox" ng-model="i.Max1" ng-change="calcEdit.change(i)">
+                      <i class="material-icons" ng-if="!calcEdit.enabled">{{i.Max1 ? 'check_box' : 'check_box_outline_blank'}}</i>
+                    </th>
+                    <th>
+                      <div ng-if="!calcEdit.enabled">{{i.Brutto}}</div>
+                      <input style="max-width:45px;" ng-if="calcEdit.enabled" ng-model="i.Brutto" ng-blur="calcEdit.change(i)">
+                    </th>
+                    <th>
+                      <div ng-if="!calcEdit.enabled">{{i.Nuvirimas}}</div>
+                      <input style="max-width:45px;" ng-if="calcEdit.enabled" ng-model="i.Nuvirimas" ng-blur="calcEdit.change(i)">
+                    </th>
+                    <th>{{i.Netto}}</th>
+                    <th>
+                      <input type="checkbox" ng-if="calcEdit.enabled" class="material_checkbox" ng-model="i.NuvirimasKcal" ng-change="calcEdit.change(i)">
+                      <i class="material-icons" ng-if="!calcEdit.enabled">{{i.NuvirimasKcal ? 'check_box' : 'check_box_outline_blank'}}</i>
+                    </th>
+                    <th>{{i.Kcal}}</th>
+                    <th>{{i.Angliavandeniai}}</th>
+                    <th>{{i.Baltymai}}</th>
+                    <th>{{i.Riebalai}}</th>
+                    <th>{{i.Cukrus}}</th>
+                    <th>{{i.Druskos}}</th>
+                    <th>{{i.Skaidulos}}</th>
+                    <th>{{i.Augaline}}</th>
+                    <th>{{i.Gyvuline}}</th>
+                    <th>
+                      <md-button class="md-icon-button" ng-click="calcEdit.delete(i.ID)">
+                        <i class="material-icons">delete</i>
+                      </md-button>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <md-button class="md-raised md-primary" flex ng-click="addMaterial()">Pridėti žaliavą ar pusgaminį</md-button>
+              <!-- <md-button flex ng-click="calcEdit.toggle()">Keisti</md-button> -->
+            </md-tab>
+            <md-tab label="technologija">
+              <table class="ingredients_table">
+                <thead>
+                  <tr>
+                    <th class="limitedWidthColumn">Seka</th>
+                    <th class="limitedWidthColumn">Baras</th>
+                    <th>Aprašymas</th>
+                    <th class="limitedWidthColumn" ng-if="technology.editable">Trinti</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="n in product.technology">
+                    <th>
+                      <span ng-if="!technology.editable">{{n.Eiliskumas}}</span>
+                      <input style="width:75px" ng-if="technology.editable" ng-model="n.Eiliskumas" type="number" />
+                    </th>
+                    <th>
+                      <span ng-if="!technology.editable" class="md-padding">{{getBarName(n.BaroID)}}</span>
+                      <select ng-if="technology.editable" class="material_input" ng-model="n.BaroID">
+                        <option ng-value="{{b.ID}}" ng-repeat="b in bars">{{b.Kodas}}</option>
+                      </select>
+                    </th>
+                    <th class="">
+                      <span ng-if="!technology.editable">{{n.Aprasymas}}</span>
+                      <textarea style="width:75%" ng-if="technology.editable" ng-model="n.Aprasymas" flex></textarea>
+                    </th>
+                    <th ng-if="technology.editable">
+                      <md-button layout="row" layout-align="center center" ng-click="technology.delete(n.ID)">
+                        <i class="material-icons">delete</i>
+                      </md-button>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <div layout="row">
+                <md-button layout="row" layout-align="center center" ng-click="technology.add()">
+                  <i class="material-icons">add</i>
+                </md-button>
+                <md-button layout="row" layout-align="center center" ng-click="technology.edit()">
+                  <i class="material-icons" ng-if="technology.editable">close</i>
+                  <i class="material-icons" ng-if="!technology.editable">edit</i>
+                </md-button>
+                <md-button layout="row" layout-align="center center" ng-click="technology.save()" ng-if="technology.editable">
+                  <i class="material-icons">save</i>
+                </md-button>
+              </div>
+            </md-tab>
+          </md-tabs>
+        </md-tab>
+      </md-tabs>
+      <div layout="row" layout-align="end center" ng-hide="currentTabId == 3">
+        <md-button layout="row" layout-align="center center" ng-click="$m.save()" ng-if="$m.editable" class="md-raised md-primary">
+          <i class="material-icons">save</i>
+        </md-button>
+        <md-button layout="row" layout-align="center center" ng-click="$m.cancelEdit()" ng-if="$m.editable">
+          <i class="material-icons">close</i>
+        </md-button>
+        <md-button layout="row" layout-align="center center" ng-click="$m.toggleEdit()" ng-if="!$m.editable">
+          <i class="material-icons">edit</i>
+        </md-button>
+      </div>
+    </md-card>
+
+  </div>
+  <md-card layout="column">
+
+  </md-card>
+
+</div>

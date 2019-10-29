@@ -1,0 +1,207 @@
+<div flex>
+    
+    <div style="width:100%" layout-wrap layout="row" ng-hide="loading || err">
+        <table class=" sticker_print_table" style="page-break-inside: avoid;">
+            <tbody>
+                <tr style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap" ng-repeat="i in stickers" ng-if="($index % 3) == 0">
+                    <th  style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap">
+                        <div  class="sticker_container noBreak" >
+                            <img class="sticker_container_image" ng-src="{{'https://7packstorage.blob.core.windows.net/erp/images/labels/' + i.Sablono_Failas}}">
+                            <div class="sticker_header">
+                                <span>{{i.Valgymo_Etapas}}</span>
+                            </div>
+                            <img class="sticker_7packlogo" src="images/7pack_grey.png"/>
+                            <div class="sticker_name">
+                                <span id="sticker_block_1"></span>
+                                <span id="sticker_block_2"></span>
+                                <span id="sticker_block_3"></span>
+                                {{i.Patiekalo_Pavadinimas}}
+                            </div>
+                            <div class="sticker_body">
+                                    <span id="sticker_block_4"></span>
+                                    <span id="sticker_block_7"></span>
+                                    <span id="sticker_block_5"></span>
+                                    <span id="sticker_block_8"></span>
+                                    <span id="sticker_block_6"></span>
+                                    <span id="sticker_block_9"></span>
+                                    <span id="sticker_block_10"></span>
+                                    <span id="sticker_block_11"></span>
+                                {{i.Aprasymas}}
+                                
+                            </div>
+                            <div class="sticker_table_wrap">
+                                <table class="sticker_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Baltymai</th>
+                                            <th>Angliavandeniai</th>
+                                            <th>Riebalai</th>
+                                            <th>Kalorijos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>{{i.Baltymai}} g</th>
+                                            <th>{{i.Angliavandeniai}} g</th>
+                                            <th>{{i.Riebalai}} g</th>
+                                            <th>{{i.Kcal}} kcal</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="sticker_attributes">
+                                <img ng-if="i.Vegetarinis" src="images/icons/attr_heart.png" class="sticker_att_img" />
+                                <img ng-if="i.Veganinis" src="images/icons/attr_vegan.png" class="sticker_att_img" />
+                                <img ng-if="i.Skaidulinis" src="images/icons/attr_veg.png" class="sticker_att_img" />
+                                <img ng-if="i.Sildomas" src="images/icons/attr_hot.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Pieno" src="images/icons/attr_milk.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Cukraus" src="images/icons/attr_sug.png" class="sticker_att_img" />
+                                <img ng-if="i.Baltyminis" src="images/icons/attr_prot.png" class="sticker_att_img" />
+                            </div>
+                            <div class="sticker_footer">
+                                <label>Suvartoti iki</label>
+                                <div>{{bestUntil}}</div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <table class=" sticker_print_table" style="page-break-inside: avoid;">
+            <tbody>
+                <tr style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap" ng-repeat="i in stickers" ng-if="($index % 3) == 1">
+                    <th  style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap">
+                        <div  class="sticker_container noBreak" >
+                            <img class="sticker_container_image" ng-src="{{'https://7packstorage.blob.core.windows.net/erp/images/labels/' + i.Sablono_Failas}}">
+                            <div class="sticker_header">
+                                <span>{{i.Valgymo_Etapas}}</span>
+                            </div>
+                            <img class="sticker_7packlogo" src="images/7pack_grey.png"/>
+                            <div class="sticker_name">
+                                <span id="sticker_block_1"></span>
+                                <span id="sticker_block_2"></span>
+                                <span id="sticker_block_3"></span>
+                                {{i.Patiekalo_Pavadinimas}}
+                            </div>
+                            <div class="sticker_body">
+                                    <span id="sticker_block_4"></span>
+                                    <span id="sticker_block_7"></span>
+                                    <span id="sticker_block_5"></span>
+                                    <span id="sticker_block_8"></span>
+                                    <span id="sticker_block_6"></span>
+                                    <span id="sticker_block_9"></span>
+                                    <span id="sticker_block_10"></span>
+                                    <span id="sticker_block_11"></span>
+                                {{i.Aprasymas}}
+                                
+                            </div>
+                            <div class="sticker_table_wrap">
+                                <table class="sticker_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Baltymai</th>
+                                            <th>Angliavandeniai</th>
+                                            <th>Riebalai</th>
+                                            <th>Kalorijos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>{{i.Baltymai}} g</th>
+                                            <th>{{i.Angliavandeniai}} g</th>
+                                            <th>{{i.Riebalai}} g</th>
+                                            <th>{{i.Kcal}} kcal</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="sticker_attributes">
+                                <img ng-if="i.Vegetarinis" src="images/icons/attr_heart.png" class="sticker_att_img" />
+                                <img ng-if="i.Veganinis" src="images/icons/attr_vegan.png" class="sticker_att_img" />
+                                <img ng-if="i.Skaidulinis" src="images/icons/attr_veg.png" class="sticker_att_img" />
+                                <img ng-if="i.Sildomas" src="images/icons/attr_hot.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Pieno" src="images/icons/attr_milk.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Cukraus" src="images/icons/attr_sug.png" class="sticker_att_img" />
+                                <img ng-if="i.Baltyminis" src="images/icons/attr_prot.png" class="sticker_att_img" />
+                            </div>
+                            <div class="sticker_footer">
+                                <label>Suvartoti iki</label>
+                                <div>{{bestUntil}}</div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <table class=" sticker_print_table" style="page-break-inside: avoid;">
+            <tbody>
+                <tr style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap" ng-repeat="i in stickers" ng-if="($index % 3) == 2">
+                    <th  style="page-break-inside: avoid;"  class="noBreak sticker_print_table_wrap" style=" width:33%">
+                        <div  class="sticker_container noBreak" >
+                            <img class="sticker_container_image" ng-src="{{'https://7packstorage.blob.core.windows.net/erp/images/labels/' + i.Sablono_Failas}}">
+                            <div class="sticker_header">
+                                <span>{{i.Valgymo_Etapas}}</span>
+                            </div>
+                            <img class="sticker_7packlogo" src="images/7pack_grey.png"/>
+                            <div class="sticker_name">
+                                <span id="sticker_block_1"></span>
+                                <span id="sticker_block_2"></span>
+                                <span id="sticker_block_3"></span>
+                                {{i.Patiekalo_Pavadinimas}}
+                            </div>
+                            <div class="sticker_body">
+                                    <span id="sticker_block_4"></span>
+                                    <span id="sticker_block_7"></span>
+                                    <span id="sticker_block_5"></span>
+                                    <span id="sticker_block_8"></span>
+                                    <span id="sticker_block_6"></span>
+                                    <span id="sticker_block_9"></span>
+                                    <span id="sticker_block_10"></span>
+                                    <span id="sticker_block_11"></span>
+                                {{i.Aprasymas}}
+                                
+                            </div>
+                            <div class="sticker_table_wrap">
+                                <table class="sticker_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Baltymai</th>
+                                            <th>Angliavandeniai</th>
+                                            <th>Riebalai</th>
+                                            <th>Kalorijos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>{{i.Baltymai}} g</th>
+                                            <th>{{i.Angliavandeniai}} g</th>
+                                            <th>{{i.Riebalai}} g</th>
+                                            <th>{{i.Kcal}} kcal</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="sticker_attributes">
+                                <img ng-if="i.Vegetarinis" src="images/icons/attr_heart.png" class="sticker_att_img" />
+                                <img ng-if="i.Veganinis" src="images/icons/attr_vegan.png" class="sticker_att_img" />
+                                <img ng-if="i.Skaidulinis" src="images/icons/attr_veg.png" class="sticker_att_img" />
+                                <img ng-if="i.Sildomas" src="images/icons/attr_hot.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Pieno" src="images/icons/attr_milk.png" class="sticker_att_img" />
+                                <img ng-if="i.Be_Cukraus" src="images/icons/attr_sug.png" class="sticker_att_img" />
+                                <img ng-if="i.Baltyminis" src="images/icons/attr_prot.png" class="sticker_att_img" />
+                            </div>
+                            <div class="sticker_footer">
+                                <label>Suvartoti iki</label>
+                                <div>{{bestUntil}}</div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div layout-fill layout="row" layout-align="center center" ng-if="loading && !error" class="md-padding">
+        <md-progress-circular></md-progress-circular>
+    </div>
+    <div ng-if="error" class="error">Serverio klaida ...</div>
+</div>

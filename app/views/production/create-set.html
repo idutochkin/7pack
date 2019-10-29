@@ -1,0 +1,26 @@
+<md-content style="min-width:50vw" class="md-padding">
+    <h2 class="md-title">Kurti naują rinkinį</h2>
+    <form ng-submit="create(set)" layout="column">
+        <md-input-container>
+            <input ng-model="set.Pavadinimas" required>
+            <label>Pavadinimas</label>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="set.Statusas" required>
+                <md-option ng-repeat="s in statuses" ng-value="s.ID">{{s.Pavadinimas}}</md-option>
+            </md-select>
+            <label>Statusas</label>
+        </md-input-container>
+        <md-input-container>
+            <md-select ng-model="set.Sablono_ID" required>
+                <md-option ng-repeat="i in images" ng-value="i.ID">{{i.Failo_Pavadinimas}}</md-option>
+            </md-select>
+            <label>Šablonas</label>
+        </md-input-container>
+        <div layout="row">
+            <md-button flex ng-click="close()">Atšaukti</md-button>
+            <md-button class="md-primary md-raised" flex type="submit">Kurti</md-button>
+        </div>
+    </form>
+</md-content>

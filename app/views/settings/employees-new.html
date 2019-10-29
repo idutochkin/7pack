@@ -1,0 +1,117 @@
+<md-card class="wrap_960">
+        <md-tabs md-dynamic-height>
+            <md-tab label="Info" >
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>Vardas</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>Pavardė</label>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <input >
+                        <label>Tabelio Numeris</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>telfono numeris</label>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <input type="date">
+                        <label>gimimo data</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>e-paštas</label>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <select>
+                            <option>Vyras</option>
+                            <option >Moteris</option>
+                        </select>
+                        <label>lytis</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>adresas</label>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <select>
+                            <option>Aktyvus</option>
+                            <option>Motinystės atostogos</option>
+                            <option>Atleistas</option>
+                        </select>
+                        <label>statusas</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <select>
+                            <option>Administracija</option>
+                            <option>Gamyba</option>
+                            <option >Logistika</option>
+                            <option>Pardavimai</option>
+                        </select>
+                        <label>Departamentas</label>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <select>
+                            <option>Vadovai</option>
+                            <option>IT skyrius</option>
+                            <option>Ukio skyrius</option>
+                        </select>
+                        <label>Poskyris</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>Pareigos</label>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="paskyra">
+                <div class="default_margin">
+                    <md-checkbox ng-value="account.active">Aktyvi</md-checkbox>
+                </div>
+                <div layout-gt-sm="row" layout="column" >
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>prisijungimo vardas</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <input>
+                        <label>e-paštas</label>
+                    </div>
+                </div>
+                <md-divider ></md-divider>
+                <div layout-gt-sm="row" layout="column" >
+                    <div class="material_input_container" flex="50">
+                        <select>
+                            <option>Virėjas</option>
+                            <option>Vairuotojas</option>
+                        </select>
+                        <label>Rolė</label>
+                    </div>
+                </div>
+                <div class="default_margin" >
+                    <md-checkbox ng-value="account.sendEmail">Siųsti prisijungimus e-paštu</md-checkbox>
+                </div>
+            </md-tab>
+        </md-tabs>
+        
+    </md-card>
+    
+    <div layout="row" layout-align="end center" class="wrap_960">
+        <md-button class="md-raised md-primary">Išsaugoti</md-button>
+    </div>
+    

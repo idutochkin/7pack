@@ -1,0 +1,11 @@
+<div layout="row" layout-fill style="overflow:auto" ng-cloak>
+    <!-- <div layout="column" class="{{$nav.mainClass}} animate_transition_5" ng-include="'views/comm/navigation.html'" ng-controller="SideNavigationCtrl" ng-show="$nav.visible"></div> -->
+    <md-sidenav layout="column" class="{{$nav.mainClass}} animate_transition_5" ng-include="'views/comm/navigation.html'"
+        ng-controller="SideNavigationCtrl" md-is-locked-open="$nav.visible" class="md-sidenav-left" md-component-id="left"></md-sidenav>
+    <md-divider></md-divider>
+    <div layout="column" layout-fill>
+        <md-toolbar ng-include="'views/comm/header.html'" class="header_wrap " layout="row" layout-align="space-between center"
+            md-whiteframe="4" ng-controller="HeaderCtrl"></md-toolbar>
+        <md-content flex ui-view id="toast-container"></md-content>
+    </div>
+</div>

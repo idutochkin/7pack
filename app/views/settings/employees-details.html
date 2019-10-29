@@ -1,0 +1,101 @@
+<md-card class="wrap_960">
+    <md-tabs md-dynamic-height>
+        <md-tab label="Info" >
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>Jonas</span>
+                    <label>Vardas</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>Jonaitis</span>
+                    <label>Pavardė</label>
+                </div>
+            </div>
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>1112</span>
+                    <label>Tabelio Numeris</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>861122333</span>
+                    <label>telfono numeris</label>
+                </div>
+            </div>
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>1993-01-31</span>
+                    <label>gimimo data</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>jonas.jonaitis@7pack.lt</span>
+                    <label>e-paštas</label>
+                </div>
+            </div>
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>Vyras</span>
+                    <label>lytis</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>Laisvės pr. 153-15, Vilnius</span>
+                    <label>adresas</label>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>Aktyvus</span>
+                    <label>statusas</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>Logistika</span>
+                    <label>Departamentas</label>
+                </div>
+            </div>
+            <div layout-gt-sm="row" layout="column">
+                <div class="material_input_container" flex="50">
+                    <span>Išvežiojimo skyrius</span>
+                    <label>Poskyris</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>Vairuotojas</span>
+                    <label>Pareigos</label>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="paskyra">
+            <div class="default_margin">
+                <md-checkbox ng-value="account.active">Aktyvi</md-checkbox>
+            </div>
+            <div layout-gt-sm="row" layout="column" >
+                <div class="material_input_container" flex="50">
+                    <span>jonas.jonaitis</span>
+                    <label>prisijungimo vardas</label>
+                </div>
+                <div class="material_input_container" flex="50">
+                    <span>jonas.jonaitis@7pack.lt</span>
+                    <label>e-paštas</label>
+                </div>
+            </div>
+            <md-divider ></md-divider>
+            <div layout-gt-sm="row" layout="column" >
+                <div class="material_input_container" flex="50">
+                    <span>Viruotojas</span>
+                    <label>Rolė</label>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout-gt-sm="row" layout-align-gt-sm="start center">
+                <md-button class="md-raised">Atstatyti slaptažodį</md-button>
+                <md-button class="md-raised" ng-disabled="true">Atblokuoti paskyrą</md-button>
+            </div>
+        </md-tab>
+    </md-tabs>
+    
+</md-card>
+
+<div layout="row" layout-align="end center" class="wrap_960">
+    <md-button class="md-raised md-primary" layout="row" layout-align="center center">
+        <i class="material-icons">edit</i>
+    </md-button>
+</div>

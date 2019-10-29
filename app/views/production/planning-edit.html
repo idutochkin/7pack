@@ -1,0 +1,116 @@
+<div layout="column">
+    <md-content>
+        <div layout-padding>
+            <div layout="row" layout-align="end">
+                <md-button ng-click="updateCustomer()" class="md-raised md-primary">UPDATE</md-button>
+            </div>
+            <table class="ingredients_table shrink">
+                <colgroup>
+                    <col span="1" style="width: 3%;">
+                    <col span="1" style="width: 15%;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: 5%;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: 5%;">
+                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: auto;">
+                    <col span="1" style="width: auto;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="pointer" ng-click="changeOrder('ID')">ID</th>
+                        <th class="pointer" ng-click="changeOrder('Pavarde')">Vardas Pavardė *</th>
+                        <th class="pointer" ng-click="changeOrder('Laikas_Nuo')">Nuo *</th>
+                        <th class="pointer" ng-click="changeOrder('Laikas_Iki')">Iki *</th>
+                        <th class="pointer" ng-click="changeOrder('Miestas')">Miesto kodas *</th>
+                        <th class="pointer" ng-click="changeOrder('Adresas')">Adresas *</th>
+                        <th class="pointer" ng-click="changeOrder('Pastabos_Kurjeriui')">Pastabos kurjeriui</th>
+                        <th class="pointer" ng-click="changeOrder('Kodas')">Kodas</th>
+                        <th class="pointer" ng-click="changeOrder('PPD')">PPD</th>
+                        <th class="pointer" ng-click="changeOrder('Aukstas')">Aukštas *</th>
+                        <th class="pointer" ng-click="changeOrder('Telefonas')">Telefonas *</th>
+                        <th class="pointer" ng-click="changeOrder('Pastabos_Gamybai')">Pastabos gamybai</th>
+                        <th class="pointer" ng-click="changeOrder('Email')">Email *</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--New temp customer-->
+                    <tr>
+                        <th></th>
+                        <th>
+                            <div flex layout="row" layout-align="space-between">
+                                <md-input-container style="margin: -5px 0;">
+                                    <input type="text" ng-model="customer.Vardas" required>
+                                </md-input-container>
+                                <md-input-container style="margin: -5px 0;">
+                                    <input type="text" ng-model="customer.Pavarde" required>
+                                </md-input-container>
+                            </div>
+                        </th>
+                        <th>
+                            <md-select ng-model="customer.Laikas_Nuo" style="margin-top: -23px;margin-bottom: 0;"
+                                required>
+                                <md-option ng-value="from" ng-repeat="from in deliveryTimeFrom" ng-click="getTimeTo(from)">{{
+                                    from }}
+                                </md-option>
+                            </md-select>
+                        </th>
+                        <th>
+                            <md-select ng-model="customer.Laikas_Iki" style="margin-top: -23px;margin-bottom: 0;"
+                                required>
+                                <md-option ng-value="to" ng-repeat="to in customer.deliveryTimeToTemp">{{ to }}</md-option>
+                            </md-select>
+                        </th>
+                        <th>
+                            <md-select ng-model="customer.Miestas" style="margin-top: -23px;margin-bottom: 0;" required>
+                                <md-option ng-value="code" ng-repeat="code in cityCodes">{{ code }}</md-option>
+                            </md-select>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Adresas" required>
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Pastabos_Kurjeriui">
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Kodas">
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-checkbox ng-model="customer.PPD"></md-checkbox>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Aukstas" required>
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Telefonas" required>
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Pastabos_Gamybai">
+                            </md-input-container>
+                        </th>
+                        <th>
+                            <md-input-container style="margin: -5px 0;">
+                                <input type="text" ng-model="customer.Email" required>
+                            </md-input-container>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-content>
+</div>

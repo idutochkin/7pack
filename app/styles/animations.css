@@ -1,0 +1,56 @@
+/* transitions */
+.animate-03s {
+    transition: all ease 0.3s;
+}
+
+/* accordion animation */
+.animate-shrink{
+	max-height: 400px;
+	overflow: hidden;
+}
+.animate-shrink.ng-hide {
+ 	max-height: 0px;
+}
+
+.animate-shrink.ng-hide-add,
+.animate-shrink.ng-hide-remove {
+	transition: all ease-in-out 0.3s;
+}
+/* rotate 90 deg */
+.arrow-up{
+	transform: rotate(180deg);
+}
+.animate-rotate {
+	transition: all 0.3s ease;
+	/* transition-delay: 0.2s; */
+}
+.anim_enter {
+	animation-name : enter_down;
+	animation-duration: 0.3s; 
+}
+@keyframes enter_down {
+	from {opacity : 0;
+		padding-left: 100px;
+	}
+	to {opacity: 1;
+		padding-left: 0px;
+	}
+}
+.animate_transition_5 {
+	transition: all 0.3s ease-in-out;
+}
+.animate_disappear {
+	max-width: 300px;
+	max-height: 40px;
+	opacity: 1;
+	overflow: hidden;
+}
+.animate_disappear.ng-hide {
+	max-width: 0px;
+	max-height: 0px;
+	opacity: 0;
+}
+.animate_disappear.ng-hide-add,
+.animate_disappear.ng-hide-remove {
+	transition: all ease-in-out 0.2s;
+}

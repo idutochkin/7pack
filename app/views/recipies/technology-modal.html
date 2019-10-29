@@ -1,0 +1,19 @@
+<md-toolbar class="md-padding">
+    <span>Technologija</span>
+</md-toolbar>
+<md-content class="modal_fs">
+    <table class="ingredients_table">
+        <thead>
+            <tr>
+                <th>Seka</th>
+                <th>Aprašymas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="n in [1,2,3,4,5]">
+                <th>{{n}}</th>
+                <th class="technology_step" ng-include="'views/comm/lorem-long.html'"></th>
+            </tr>
+        </tbody>
+    </table>
+</md-content> 

@@ -1,0 +1,194 @@
+<div layout="row" layout-align="center center" layout-fill ng-show="loading">
+    <md-progress-circular></md-progress-circular>
+</div>
+
+<div layout="column" ng-hide="loading">
+    <md-card layout="column" layout-align="">
+        <div layout="row">
+            <md-button layout="row" layout-align="center center" class="" ng-if="!edit.enabled" ng-click="edit.enable()">
+                <i class="material-icons">edit</i>
+            </md-button>
+            <md-button layout="row" layout-align="center center" class="" ng-if="edit.enabled" ng-click="edit.cancel()">
+                <i class="material-icons">close</i>
+            </md-button>
+            <md-button layout="row" layout-align="center center" class="" ng-if="edit.enabled" ng-click="edit.save()">
+                <i class="material-icons">save</i>
+            </md-button>
+        </div>
+        <div layout="row" layout-align="space-around center" style="margin-bottom: 10px;" flex>
+            <div layout="column">
+                <div class="text_2line padding-5">
+                    <strong ng-if="!edit.enabled">{{set.ID}} | {{set.Pavadinimas}}</strong>
+                    <input class="material_input" ng-if="edit.enabled" ng-model="set.Pavadinimas">
+                    <p>Pavadinimas</p>
+                </div>
+                <div layout="row">
+                    <div class="text_2line padding-5">
+                        <span ng-if="!edit.enabled">{{getStatusName(set.Statusas)}}</span>
+                        <select class="material_input" ng-if="edit.enabled" ng-model="set.Statusas">
+                            <option ng-repeat="st in statuses" ng-value="st.ID">{{st.Pavadinimas}}</option>
+                        </select>
+                        <p>statusas</p>
+                    </div>
+                    <div class="text_2line padding-5">
+                        <span ng-if="!edit.enabled">{{getImageName(set.Sablono_ID)}}</span>
+                        <select class="material_input lc" ng-if="edit.enabled" ng-model="set.Sablono_ID">
+                            <option ng-repeat="image in images" ng-value="image.ID">{{image.Failo_Pavadinimas}}</option>
+                        </select>
+                        <p>ŠABLONAS</p>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" layout-align="center center" flex="20">
+                <div layout="column" class="indicator_wrap " flex="50">
+                    <span>{{calculations.LimitasKcal || 0}} Kcal</span>
+                    <p>Kaloringumas</p>
+                </div>
+                <div layout="column" class="indicator_wrap " flex="50">
+                    <span>{{calculations.Netto || 0}} g</span>
+                    <p>Netto</p>
+                </div>
+            </div>
+            <div layout="column" layout-align="end end">
+                <md-datepicker ng-model="calendar.date" ng-change="calendar.change()" style="width: 208px;"></md-datepicker>
+                <div layout="row">
+                    <md-button ng-click="calendar.go('prev')">Atgal</md-button>
+                    <md-button ng-click="calendar.go('next')">Sekanti</md-button>
+                </div>
+            </div>
+        </div>
+
+        <div layout="row" layout-align="space-around center">
+            <div layout="column" flex="35">
+
+                <div layout="row" layout-align="space-between center">
+                    <div>Rieb. 15 %</div>
+                    <div>Angl. 60 %</div>
+                    <div>Balt. 25 %</div>
+                </div>
+                <canvas id="leftCanvas" height="40px"></canvas>
+
+            </div>
+            <div layout="column" flex="35">
+                <div layout="row" layout-align="space-between center">
+                    <div>Augalinė 90 %</div>
+                    <div>Gyvulinė 10 %</div>
+                </div>
+                <canvas id="rightCanvas" height="40px"></canvas>
+            </div>
+        </div>
+        <div layout="row" layout-align="space-around center" layout-margin>
+            <div layout="column">
+                <div flex>
+                    <strong>Skaidulos -
+                        <span ng-class="calculations.Skaidulos >= 25 ? 'green-text' : 'red-text'">{{calculations.Skaidulos}}</span>
+                        g</strong>
+                </div>
+                <div flex>(>= 25 g)</div>
+            </div>
+            <div layout="column">
+                <div flex>
+                    <strong>Druska -
+                        <span ng-class="calculations.Druskos &#60;= 3 ? 'green-text' : 'red-text'">{{calculations.Druskos}}</span>
+                        g</strong>
+                </div>
+                <div flex>(&#60;= 3 g)</div>
+            </div>
+            <div layout="column">
+                <div flex>
+                    <strong>Cukrūs -
+                        <span ng-class="calculations.Cukrus &#60;= 25 ? 'green-text' : 'red-text'">{{calculations.Cukrus}}</span>
+                        g</strong>
+                </div>
+                <div flex>(&#60;= 25 g)</div>
+            </div>
+        </div>
+
+    </md-card>
+    <md-content>
+        <div layout="row" layout-align="start center">
+            <md-button layout="row" layout-align="center center" class="md-primary md-raised" ng-click="addItem()">
+                <i class="material-icons">add</i>
+            </md-button>
+            <md-button layout="row" layout-align="center center" ng-click="deleteMenuItems()" class="md-warn md-raised"
+                ng-disabled="!checkBox.isAnySelected()">
+                <i class="material-icons">delete</i>
+            </md-button>
+            <md-button layout="row" layout-align="center center" class="" ng-disabled="true" ng-click="copy()">
+                <i class="material-icons">content_copy</i>
+            </md-button>
+        </div>
+        <div class="md-padding" flex layout="column" layout-align="center center" ng-hide="set.menu[0]">
+            <h2>Rinkinys "{{set.Pavadinimas}}" pasirinktai datai patiekalų neturi. </h2>
+            <h4>Spauskite
+                <i class="material-icons">add</i> jei norite pridėti.</h4>
+        </div>
+        <table class="ingredients_table shrink" ng-show="set.menu[0]">
+            <thead class="">
+                <tr>
+                    <th rowspan="2">
+                        <input type="checkbox" ng-model="checkBox.all" ng-change="checkBox.selectAll()">
+                    </th>
+                    <th rowspan="2">Etapas</th>
+                    <th rowspan="2">Kalk.</th>
+                    <th rowspan="2">Pavadinimas</th>
+                    <th colspan="5">Parametrai</th>
+                    <th colspan="3">Micro</th>
+                    <th colspan="3">Macro</th>
+                    <th colspan="2">Kilme</th>
+                </tr>
+                <tr class="thead_big">
+                    <th class="text_vertical limited_width">Mat. vnt.</th>
+                    <th class="text_vertical limited_width">Netto</th>
+                    <th class="text_vertical limited_width">Limitas kcal</th>
+                    <th class="text_vertical limited_width">Kcal</th>
+                    <th class="text_vertical limited_width">Žingsnis</th>
+                    <th class="text_vertical limited_width">Balt.</th>
+                    <th class="text_vertical limited_width">Rieb.</th>
+                    <th class="text_vertical limited_width">Angl.</th>
+                    <th class="text_vertical limited_width">Druskos</th>
+                    <th class="text_vertical limited_width">Cukrūs</th>
+                    <th class="text_vertical limited_width">Skaidulos</th>
+                    <th class="text_vertical limited_width">Augalinė</th>
+                    <th class="text_vertical limited_width">Gyvulinė</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in set.menu">
+                    <th>
+                        <input type="checkbox" ng-model="i.selected" ng-click="checkBox.select()">
+                    </th>
+                    <th>
+                        <select ng-model="i.ValgymoEtapas" ng-change="updateMenuItem(i)">
+                            <option ng-value="1">Pusryčiai</option>
+                            <option ng-value="2">Desertas</option>
+                            <option ng-value="3">Pietūs</option>
+                            <option ng-value="4">Užkandis</option>
+                            <option ng-value="5">Vakarienė</option>
+                        </select>
+                    </th>
+                    <th>0</th>
+                    <th>{{i.Patiekalo_Pavadinimas | limitTo : 30}} {{i.Patiekalo_Pavadinimas.length > 30 ? '...' : ''}}</th>
+                    <th>
+                        <select ng-model="i.MatavimoVnt" ng-change="updateMenuItem(i)">
+                            <option ng-repeat="u in units" ng-value="u.ID">{{u.Kodas}}</option>
+                        </select>
+                    </th>
+                    <th>{{i.Netto}}</th>
+                    <th>
+                        <input style="width:35px" ng-model="i.LimitasKcal" ng-blur="updateMenuItem(i)" ng-keyup="updateOnEnter($event, i)" />
+                    </th>
+                    <th>{{i.Kcal}}</th>
+                    <th>{{i.Zingsnis}}</th>
+                    <th>{{i.Baltymai}}</th>
+                    <th>{{i.Riebalai}}</th>
+                    <th>{{i.Angliavandeniai}}</th>
+                    <th>{{i.Druskos}}</th>
+                    <th>{{i.Cukrus}}</th>
+                    <th>{{i.Skaidulos}}</th>
+                    <th>{{i.Augaline}}</th>
+                    <th>{{i.Gyvuline}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </md-content>
+</div>

@@ -1,0 +1,74 @@
+<div layout-fill layout="column">    
+    <md-toolbar layout="row" layout-align="start center">
+        <md-button layout="row" layout-align="center center" ng-click="goBack()">
+            <i class="material-icons">arrow_back</i>
+        </md-button>
+        <span>Registracijos terminalas</span>
+    </md-toolbar>
+    <div layout="column" layout-gt-sm="row" flex>
+        <md-card flex-gt-sm="25" flex >
+            <div class="clock">{{_time}}</div>
+            <md-divider></md-divider>
+            <form layout="row" layout-align="center center" ng-submit="reg.write(reg.input)">
+                <input 
+                    class="timetracking_scanInput" 
+                    placeholder="Skenuoti Barkodą" 
+                    id="idInput" 
+                    ng-model="reg.input"
+                    autocomplete="off">
+                <md-button type="submit">
+                    Enter
+                </md-button>
+            </form>
+            <md-divider></md-divider>
+            <!-- <div layout="row" layout-align="center center">
+                <div class="timetracking_scanPhoto"></div>
+            </div> -->
+            <div layout="column" layout-align="center center" ng-if="reg.view.show">
+                <h2>{{reg.view.name}}</h2>
+                <!-- <h3>Check-In @ {{_time}}</h3> -->
+            </div>
+        </md-card>
+        <md-content flex-gt-sm="25" flex>
+            <md-list>
+                <md-list-item class="md-3-line " ng-repeat="item in events | limitTo : 10 : 0" ng-click="null">
+                    <img class="md-avatar photoImitation" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3 layout="row"><div class="status_indicator" ng-class="item.CheckOut ? 'status_out' : ''"></div><strong>{{item.First_Name}} {{item.Second_Name}} ({{item.EmployeeID}})</strong></h3>
+                        <h4>{{item.Title}}</h4>
+                        <p>{{item.CheckOut ? 'Išėjo' : 'Atėjo'}} {{item.CheckOut ? item.CheckOut : item.CheckIn}}</p>
+                    </div>
+                    
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <md-divider></md-divider>
+        <md-content flex-gt-sm="25" flex>
+            <md-list>
+                <md-list-item class="md-3-line " ng-repeat="item in events | limitTo : 10 : 10" ng-click="null">
+                    <img class="md-avatar photoImitation" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3 layout="row"><div class="status_indicator" ng-class="item.CheckOut ? 'status_out' : ''"></div><strong>{{item.First_Name}} {{item.Second_Name}} ({{item.EmployeeID}})</strong></h3>
+                        <h4>{{item.Title}}</h4>
+                        <p>{{item.CheckOut ? 'Išėjo' : 'Atėjo'}} {{item.CheckOut ? item.CheckOut : item.CheckIn}}</p>
+                    </div>
+                    
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <md-divider></md-divider>
+        <md-content flex-gt-sm="25" flex>
+            <md-list>
+                <md-list-item class="md-3-line " ng-repeat="item in events | limitTo : 10 : 20" ng-click="null">
+                    <img class="md-avatar photoImitation" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3 layout="row"><div class="status_indicator" ng-class="item.CheckOut ? 'status_out' : ''"></div><strong>{{item.First_Name}} {{item.Second_Name}} ({{item.EmployeeID}})</strong></h3>
+                        <h4>{{item.Title}}</h4>
+                        <p>{{item.CheckOut ? 'Išėjo' : 'Atėjo'}} {{item.CheckOut ? item.CheckOut : item.CheckIn}}</p>
+                    </div>
+                    
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+</div>

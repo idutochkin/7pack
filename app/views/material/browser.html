@@ -1,0 +1,67 @@
+<md-content layout="row" layout-fill ng-controller="MaterialBrowserCtrl as ctrl">
+  <md-content class="browser_wrap_expanded">
+    <div>
+      <div layout="row" layout-fill layout-align="space-between center" class="browser_search_wrap">
+        <div flex="20" layout="column" layout-align="center center">
+          <i class="material-icons">search</i>
+        </div>
+        <input class="browser_input" ng-model="input" ng-change="search(input)">
+        <div flex="20" layout="column" layout-align="center center">
+          <md-button class="md-icon-button" ng-click="cleanSearch()">
+            <i class="material-icons">close</i>
+          </md-button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <md-list>
+            <md-list-item class="md-3-line" ui-sref="material.browser.selected({id:mat.ID})" ng-repeat="mat in materials | filter : filterTxt">
+              <div class="md-avatar"> </div>
+              <div class="md-list-item-text" layout="column">
+                <h3>{{mat.Pavadinimas}}</h3>
+                <p layout="row" layout-align="space-between center">
+                  <span>{{mat.Grupe}}</span>
+                  <span>{{mat.ID}}</span>
+                </p>
+                <p layout="row" layout-align="space-between center">
+                  <span>G: {{mat.Gyvuline}}% A: {{mat.Augaline}}%</span>
+                  <span>{{mat.Kcal}} kcal</span>
+                </p>
+              </div>
+            </md-list-item>
+            <md-list-item layout="row" layout-align="space-between center" class="pagination">
+              <md-button layout="row" layout-align="center center" ng-disabled="CURRENT_PAGE == 1" ng-click="prevPage()">
+                <i class="material-icons">keyboard_arrow_left</i>
+              </md-button>
+              <md-button layout="row" layout-align="center center" ng-click="nextPage()">
+                <i class="material-icons">keyboard_arrow_right</i>
+              </md-button>
+            </md-list-item>
+            <!-- <md-virtual-repeat-container id="vertical-container" >
+                                <md-list-item class="md-3-line" ui-sref="material.browser.selected({id:mat.ID})" md-virtual-repeat="mat in ctrl.dynamicItems" md-on-demand="true">
+                                    <div class="md-avatar"> </div>         
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3>{{mat.Pavadinimas}}</h3>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>{{mat.Grupe}}</span>
+                                            <span>{{mat.ID}}</span>
+                                        </p>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>G: {{mat.Gyvuline}}% A: {{mat.Augaline}}%</span>
+                                            <span>{{mat.Kcal}} kcal</span>
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                
+                            </md-virtual-repeat-container> -->
+          </md-list>
+        </div>
+      </div>
+    </div>
+  </md-content>
+  <md-divider></md-divider>
+
+  <md-content flex ui-view></md-content>
+
+
+</md-content>

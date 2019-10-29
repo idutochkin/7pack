@@ -1,0 +1,43 @@
+<md-content style="min-width:50vw" class="md-padding">
+    <h2 class="md-title">Kurti naują receptą</h2>
+    <form ng-submit="create(product)" layout="column">
+        <md-input-container>
+            <input ng-model="product.Pavadinimas" required>
+            <label >Pavadinimas</label>
+        </md-input-container>
+        <div layout="row">
+            <md-input-container flex>
+                <md-select ng-model="product.MatavimoVntID" required>
+                    <md-option ng-repeat="u in units" ng-value="u.ID">{{u.Pavadinimas}} ({{u.Kodas}})</md-option>
+                </md-select>
+                <label >Matavimo Vienetas</label>
+            </md-input-container>
+            <md-input-container flex>
+                <md-select ng-model="product.Tipas" required>
+                    <md-option ng-repeat="t in types" ng-value="t.ID">{{t.Tipo_Pavadinimas}}</md-option>
+                </md-select>
+                <label >Statusas</label>
+            </md-input-container>
+        </div>
+        <md-input-container>
+            <md-select ng-model="product.Statusas" required>
+                <md-option ng-repeat="s in statuses" ng-value="s.ID">{{s.Statuso_Pavadinimas}}</md-option>
+            </md-select>
+            <label >Statusas</label>
+        </md-input-container>
+		<label style="text-align: center; color: #acacac; margin-bottom: -10px;">Sudėtingumas</label>
+        <div layout="row" layout-align="center center" class="md-padding">
+            <md-slider-container flex>
+                <md-slider flex min="0" max="5" ng-model="product.Sudetingumas" aria-label="red" id="red-slider">
+                </md-slider>
+                <md-input-container>
+                    <input flex type="number" ng-model="product.Sudetingumas" aria-label="red" aria-controls="red-slider">
+                </md-input-container>
+            </md-slider-container>
+        </div>
+        <div layout="row">
+            <md-button flex ng-click="close()">Atšaukti</md-button>
+            <md-button class="md-primary md-raised" flex type="submit">Kurti</md-button>
+        </div>
+    </form>
+</md-content>

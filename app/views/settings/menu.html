@@ -1,0 +1,11 @@
+<md-card class="wrap_960" layout="column">
+    <md-subheader>Nustatymai</md-subheader>
+    <div layout-gt-sm="row" layout-wrap>
+        <md-content flex="25" ng-repeat="set in settingMenu" class="settings_menuItemWrap hover_teal" layout="column" md-ink-ripple ui-sref="{{set.sref}}">
+            <icon layout="row" layout-align="center center">
+                <i class="material-icons md-48">{{set.icon}}</i>
+            </icon>
+            <span>{{set.name}}</span>
+        </md-content>
+    </div>
+</md-card>

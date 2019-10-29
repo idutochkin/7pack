@@ -1,0 +1,96 @@
+<div layout="row" layout-fill>
+    <md-content class="{{$browser.currentClass}} " layout-fill>
+        <div layout="column">
+            <md-button class="md-raised md-primary" flex layout="row" layout-align="center center" ng-click="createProduct()">
+                <i class="material-icons">add</i>
+            </md-button>
+            <div layout="row" layout-align="space-between center" class="browser_search_wrap">
+                <div flex="20" layout="column" layout-align="center center" ng-show="$browser.expanded" class="animate_disappear">
+                    <i class="material-icons">search</i>
+                </div>
+                <input class="browser_input animate_disappear" flex="45" ng-model="searchText" ng-show="$browser.expanded">
+                <div flex="15" layout="column" layout-align="center center" ng-show="$browser.expanded" class="animate_disappear">
+                    <md-button class="md-icon-button" ng-click="cleanSearch()">
+                        <i class="material-icons">close</i>
+                    </md-button>
+                </div>
+                <div flex layout="column" layout-align="center center">
+                    <md-button class="md-icon-button" ng-click="$browser.toggle()">
+                        <i class="material-icons" ng-show="$browser.expanded">keyboard_arrow_left</i>
+                        <i class="material-icons" ng-show="!$browser.expanded">keyboard_arrow_right</i>
+                    </md-button>
+                </div>
+            </div>
+            <div>
+                <md-tabs md-dynamic-height>
+                    <md-tab label="{{$browser.expanded ? 'patiekalai' : '1'}}">
+                        <md-content>
+                            <md-list>
+                                <md-list-item class="md-3-line" ui-sref="recipies.browser.selected({id:mat.ID})"
+                                    ng-repeat="mat in products | filter : searchText" ng-click="tabs.add(mat)">
+                                    <!-- <div class="md-avatar"> </div>          -->
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3>{{mat.Pavadinimas}}</h3>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>{{mat.Tipas}}</span>
+                                            <span>{{mat.ID}}</span>
+                                        </p>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>{{mat.Statusas}}</span>
+                                            <span>{{mat.Kcal}} kcal</span>
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item layout="row" layout-align="space-between center">
+                                    <md-button layout="row" layout-align="center center" ng-disabled="CURRENT_PAGE === 0"
+                                        ng-click="prevPage()">
+                                        <i class="material-icons">keyboard_arrow_left</i>
+                                    </md-button>
+                                    <md-button layout="row" layout-align="center center" ng-click="nextPage()">
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="{{$browser.expanded ? 'pusgaminiai' : '2'}}">
+                        <md-content>
+                            <md-list>
+                                <md-list-item class="md-3-line" ui-sref="recipies.browser.selected({id:semi.ID})"
+                                    ng-repeat="semi in semiFin | filter : searchText | limitTo : 100 : 0" ng-click="tabs.add(semi)">
+                                    <!-- <div class="md-avatar"> </div>          -->
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3>{{semi.Pavadinimas}}</h3>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>{{semi.Tipas}}</span>
+                                            <span>{{semi.ID}}</span>
+                                        </p>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>{{semi.Statusas}}</span>
+                                            <span>{{semi.Kcal}} kcal</span>
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </div>
+    </md-content>
+    <md-divider></md-divider>
+    <div layout="column" flex>
+        <div layout="row">
+            <div class="tab" ng-repeat="tab in tabs.data" layout="row" ng-class="{{tabs.isSelected(tab.ID)}}">
+                <md-content class="tab-content" md-ink-ripple layout="row" layout-align="center center" ng-click="tabs.go(tab)">
+                    {{tab.ID}} | {{tab.Pavadinimas | limitTo : 12}}{{tab.Pavadinimas.length > 12 ? ' ...' : ''}}
+                </md-content>
+                <md-content md-ink-ripple layout="row" layout-align="center center" class="tab-action" ng-click="tabs.remove(tab.ID)">
+                    <i class="material-icons">close</i>
+                </md-content>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <md-content flex ui-view ng-if="$browser.uiViewActive"></md-content>
+    </div>
+</div>

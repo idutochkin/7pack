@@ -1,0 +1,250 @@
+<div layout="column">
+  <md-content infinite-scroll="loadNext()" infinite-scroll-container="'#toast-container'">
+    <md-tabs md-dynamic-height>
+      <md-tab label="Klientų sąrašas" md-on-select="resetCustomersDisplayed()" md-on-deselect="dropCustomersDisplayed()">
+        <div layout="row" layout-align="center center" layout-fill ng-show="loadingCustomers">
+          <md-progress-circular></md-progress-circular>
+        </div>
+        <div layout-padding ng-hide="loadingCustomers">
+          <div layout="row" layout-align="space-between center">
+            <md-input-container class="noerror">
+              <label>Kliento paieška</label>
+              <input type="text" ng-model="searchCustomer">
+            </md-input-container>
+            <md-button ng-click="addCustomer()" class="md-raised md-primary">NAUJAS</md-button>
+          </div>
+          <table class="ingredients_table shrink">
+            <colgroup>
+              <col span="1" style="width: 3%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: 5%;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: 5%;">
+              <col span="1" style="width: 10%;">
+              <col span="1" style="width: auto;">
+              <col span="1" style="width: auto;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="pointer" ng-click="changeOrder('ID')">ID</th>
+                <th class="pointer" ng-click="changeOrder('Pavarde')">Vardas Pavardė *</th>
+                <th class="pointer" ng-click="changeOrder('Laikas_Nuo')">Nuo *</th>
+                <th class="pointer" ng-click="changeOrder('Laikas_Iki')">Iki *</th>
+                <th class="pointer" ng-click="changeOrder('Miestas')">Miesto kodas *</th>
+                <th class="pointer" ng-click="changeOrder('Adresas')">Adresas *</th>
+                <th class="pointer" ng-click="changeOrder('Pastabos_Kurjeriui')">Pastabos kurjeriui</th>
+                <th class="pointer" ng-click="changeOrder('Kodas')">Kodas</th>
+                <th class="pointer" ng-click="changeOrder('PPD')">PPD</th>
+                <th class="pointer" ng-click="changeOrder('Aukstas')">Aukštas *</th>
+                <th class="pointer" ng-click="changeOrder('Telefonas')">Telefonas *</th>
+                <th class="pointer" ng-click="changeOrder('Pastabos_Gamybai')">Pastabos gamybai</th>
+                <th class="pointer" ng-click="changeOrder('Email')">Email *</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th></th>
+                <th>
+                  <div flex layout="row" layout-align="space-between">
+                    <md-input-container style="margin: -5px 0;">
+                      <input type="text" ng-model="newCustomer.Vardas" aria-label="Vardas" required>
+                    </md-input-container>
+                    <md-input-container style="margin: -5px 0;">
+                      <input type="text" ng-model="newCustomer.Pavarde" aria-label="Pavarde" required>
+                    </md-input-container>
+                  </div>
+                </th>
+                <th>
+                  <md-select ng-model="newCustomer.Laikas_Nuo" style="margin-top: -23px;margin-bottom: 0;" aria-label="Nuo"
+                    required>
+                    <md-option ng-value="from" ng-repeat="from in deliveryTimeFrom" ng-click="getTimeTo(from)">{{
+                      from }}
+                    </md-option>
+                  </md-select>
+                </th>
+                <th>
+                  <md-select ng-model="newCustomer.Laikas_Iki" style="margin-top: -23px;margin-bottom: 0;" aria-label="Iki"
+                    required>
+                    <md-option ng-value="to" ng-repeat="to in newCustomer.deliveryTimeToTemp">{{
+                      to
+                      }}</md-option>
+                  </md-select>
+                </th>
+                <th>
+                  <md-select ng-model="newCustomer.Miestas" style="margin-top: -23px;margin-bottom: 0;" aria-label="Miestas"
+                    required>
+                    <md-option ng-value="code" ng-repeat="code in cityCodes">{{ code }}</md-option>
+                  </md-select>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Adresas" aria-label="Adresas" required>
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Pastabos_Kurjeriui" aria-label="Kurjeriui">
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Kodas" aria-label="Kodas">
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-checkbox ng-model="newCustomer.PPD" aria-label="PPD"></md-checkbox>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Aukstas" aria-label="Aukstas" required>
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Telefonas" aria-label="Telefonas" required>
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Pastabos_Gamybai" aria-label="Gamybai">
+                  </md-input-container>
+                </th>
+                <th>
+                  <md-input-container style="margin: -5px 0;">
+                    <input type="text" ng-model="newCustomer.Email" aria-label="Email" required>
+                  </md-input-container>
+                </th>
+              </tr>
+              <tr ng-repeat="customer in customers | filterCustomers:searchCustomer | orderBy: orderField | limitTo: customersDisplayed  track by customer.ID"
+                ng-dblclick="editRow(customer)">
+                <th>{{customer.ID}}</th>
+                <th>
+                  <div flex layout="row" layout-align="space-between">
+                    {{customer.Vardas}}
+                    {{customer.Pavarde}}
+                  </div>
+                </th>
+                <th>
+                  {{customer.Laikas_Nuo}}
+                </th>
+                <th>
+                  {{customer.Laikas_Iki}}
+                </th>
+                <th>
+                  {{customer.Miestas}}
+                </th>
+                <th>
+                  {{customer.Adresas}}
+                </th>
+                <th>
+                  {{customer.Pastabos_Kurjeriui}}
+                </th>
+                <th>
+                  {{customer.Kodas}}
+                </th>
+                <th>
+                  <span class="ppd-{{customer.PPD}}">&#10003;</span>
+                </th>
+                <th>
+                  {{customer.Aukstas}}
+                </th>
+                <th>
+                  {{customer.Telefonas}}
+                </th>
+                <th>
+                  {{customer.Pastabos_Gamybai}}
+                </th>
+                <th>
+                  {{customer.Email}}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+
+      <md-tab label="Kalendorius" md-on-select="resetCalendarsDisplayed()" md-on-deselect="dropCalendarsDisplayed()">
+        <div layout="row" layout-margin>
+          <div layout="row" layout-align="space-between center" flex="20">
+            <md-select ng-model="selectedYears" flex="40" multiple="true" aria-label="Years">
+              <md-option ng-value="year" ng-repeat="year in yearsOfDelivery">{{ year }}</md-option>
+            </md-select>
+            <md-select ng-model="selectedMonths" flex="40" multiple="true" aria-label="Months">
+              <md-option ng-repeat="month in monthsOfDelivery" ng-value="month">{{ month.name }}</md-option>
+            </md-select>
+          </div>
+          <div layout="row" layout-align="space-between center" flex="80">
+            <div layout="row">
+              <md-button class=" md-raised md-primary" ng-click="updateTable()">Rodyti</md-button>
+              <md-button class="md-raised md-primary" ng-click="PDFReport()">Gamybos lapas</md-button>
+              <md-progress-circular style="margin-left: 20px" ng-show="pdfPreparing"></md-progress-circular>
+            </div>
+            <md-button class="md-raised md-primary" ng-click="closeDay()">Uždaryti dieną</md-button>
+          </div>
+        </div>
+        <div layout="row" layout-align="end" layout-padding ng-hide="loadingCalendar">
+          <md-button class="md-raised md-primary" ng-disabled="!canIGetPrevDates" ng-click="getPrevDates()">←
+          </md-button>
+          <md-button class="md-raised md-primary" ng-disabled="!canIGetNextDates" ng-click="getNextDates()">→
+          </md-button>
+        </div>
+        <div layout-padding>
+          <div layout="row" layout-align="center center" layout-fill ng-show="loadingCalendar">
+            <md-progress-circular></md-progress-circular>
+          </div>
+          <table class="ingredients_table shrink" ng-hide="loadingCalendar">
+            <thead>
+              <tr>
+                <th class="pointer" ng-click="changeCalendarOrder('client.Pavarde')">Vardas Pavardė</th>
+                <th ng-repeat="date in dates | limitTo : limit : begin" ng-style="headerBackground(date.formatDate)">
+                  {{date.dateString}}
+                </th>
+                <th>Suma</th>
+              </tr>
+              <tr>
+                <th>Viso rinkinių</th>
+                <th ng-repeat="date in dates | limitTo : limit : begin" ng-style="headerBackground(date.formatDate)">
+                  {{date.ordersInCurrentDate}}
+                </th>
+                <th>{{dates.sumOrders}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>
+                  <md-autocomplete md-selected-item="newOrder" md-search-text="searchText" md-items="customer in getMatches(searchText)"
+                    md-item-text="customer.IdName">
+                    <md-item-template>
+                      <span md-highlight-text="searchText">{{customer.IdName}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No matches found.
+                    </md-not-found>
+                  </md-autocomplete>
+                </th>
+                <th ng-repeat="date in dates | limitTo : limit : begin" ng-style="headerBackground(date.formatDate)"
+                  ng-dblclick="selectSet(date.formatDate, newOrder.ID)"></th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="entry in calendarEntries | orderBy: calendarOrderField | limitTo: calendarsDisplayed"
+                ng-style="entry.style">
+                <th>{{entry.client.IdName}}</th>
+                <th ng-repeat="cell in entry.cells | limitTo : limit : begin track by $index" ng-dblclick="selectSet(cell.date, entry.client.ID, cell.id, cell.set)"
+                  ng-style="cell.style">
+                  <md-tooltip ng-if="cell.tooltip" md-direction="bottom">{{cell.tooltip}}</md-tooltip>
+                  {{cell.set}}
+                </th>
+                <th>{{entry.sum}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

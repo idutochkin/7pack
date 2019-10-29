@@ -1,0 +1,152 @@
+<div class="wrap_960" ng-controller="ClientsEditCtrl as client">
+	<md-subheader><strong>User editor</strong></md-subheader>
+	<flash-message duration="5000"></flash-message>
+	<form ng-submit="submit()">
+		<md-card class="md-padding">
+			<md-tabs md-dynamic-height>
+				<md-tab label="Bendra info">
+					<md-content md-colors="{background: 'default-background-hue-1'}">
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<select ng-model="client.Type">
+									<option ng-value="'phy'">Fizinis</option>
+									<option ng-value="'com'">Juridinis</option>
+								</select>
+								<label>Tipas</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Name" value="{{client.Name}}">
+								<label ng-if="client.Type == 'phy'">Vardas Pavardė</label>
+								
+								<label ng-if="client.Type == 'com'">pavadinimas</label>
+							</div>
+						</div>
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<input ng-model="Phone" value="{{client.Phone}}">
+								<label>telfono numeris</label>
+							</div>
+							<div class="material_input_container" flex="50">
+							
+								<select ng-if="client.Type == 'phy'" ng-model="client.Gender">
+									<option ng-value="'V'">Vyras</option>
+									<option ng-value="'M'">Moteris</option>
+								</select>
+								<label ng-if="client.Type == 'phy'">lytis</label>
+								
+								<select ng-if="client.Type == 'com'" ng-model="client.Status">
+									<option ng-value="'UAB'">UAB</option>
+									<option ng-value="'AB'">AB</option>
+									<option ng-value="'MB'">MB</option>
+									<option ng-value="'VŠI'">VŠI</option>
+									<option ng-value="'VI'">VI</option>
+									<option ng-value="'II'">II</option>
+								</select>
+								<label ng-if="client.Type == 'com'">Teisinis statusas</label>
+								
+							</div>
+						</div>
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+							
+								<input ng-if="client.Type == 'phy'" ng-model="client.Birthday" type="date" value="{{client.Birthday}}">
+								<label ng-if="client.Type == 'phy'">Gimimo data</label>
+								
+								<input ng-if="client.Type == 'com'" ng-model="client.Company_No" value="{{client.Company_No}}">
+								<label ng-if="client.Type == 'com'">įmonės kodas</label>
+								
+							</div>
+							<div class="material_input_container" flex="50">
+								
+								<input ng-if="client.Type == 'com'" ng-model="client.VAT_No" value="{{client.VAT_No}}">
+								<label ng-if="client.Type == 'com'">PVM kodas</label>
+								
+							</div>
+						</div>
+					</md-content>
+				</md-tab>
+				<md-tab label="Kontaktinė">
+					<md-content md-colors="{background: 'default-background-hue-1'}">
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Billing_Address" value="{{client.Billing_Address}}">
+								<label>Adresas sąskaitai</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Email" value="{{client.Email}}">
+								<label>El. Paštas</label>
+							</div>
+						</div>
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Contact_Person" value="{{client.Contact_Person}}">
+								<label>Kontaktinis asmuo</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Delivery_Address" value="{{client.Delivery_Address}}">
+								<label>Adresas pristatymui</label>
+							</div>
+						</div>
+					</md-content>
+				</md-tab>
+				<md-tab label="Pardavimų">
+					<md-content md-colors="{background: 'default-background-hue-1'}">
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<select ng-controller="ClientsEditCtrl as clients_edit_ctrl" ng-model="client.Payment_Type">
+									<option ng-repeat="PaymentType in clients_edit_ctrl.Payment_Type_List" ng-value="'{{PaymentType.Pavadinimas}}'">{{PaymentType.Pavadinimas}}</option>
+								</select>
+								<label>Mokėjimo tipai</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Nuolaidos" value="{{client.Nuolaidos}}">
+								<label>Nuolaidos</label>
+							</div>
+						</div>
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Sales_Manager" value="{{client.Sales_Manager}}">
+								<label>Vadybininkas</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<select ng-controller="ClientsEditCtrl as clients_edit_ctrl" ng-model="client.Payment_Terms">
+									<option ng-repeat="PaymentTerms in clients_edit_ctrl.Payment_Terms_List" ng-value="'{{PaymentTerms.Kodas}}'">{{PaymentTerms.Kodas}}</option>
+								</select>
+								<label>Mokėjimo sąlygos</label>
+							</div>
+						</div>
+					</md-content>
+				</md-tab>
+				<md-tab label="Papildomai">
+					<md-content md-colors="{background: 'default-background-hue-1'}">
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<select ng-model="client.Blocked">
+									<option ng-value="'Taip'">Taip</option>
+									<option ng-value="'Ne'">Ne</option>
+								</select>
+								<label>Blokuotas</label>
+							</div>
+							<div class="material_input_container" flex="50">
+								<select ng-model="client.Is_Salesperson">
+									<option ng-value="'Taip'">Taip</option>
+									<option ng-value="'Ne'">Ne</option>
+								</select>
+								<label>Pardavėjas</label>
+							</div>
+						</div>
+						<div layout-gt-sm="row" layout="column">
+							<div class="material_input_container" flex="50">
+								<input ng-model="client.Magento" value="{{client.Magento}}">
+								<label>Magento</label>
+							</div>
+						</div>
+					</md-content>
+				</md-tab>
+			</md-tabs>
+		</md-card>
+		<div layout="row" layout-align="end center" class="wrap_960">
+			<md-button class="md-raised md-primary" type="submit">Išsaugoti</md-button>
+		</div>
+	</form>
+</div>

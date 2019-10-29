@@ -1,0 +1,287 @@
+<div layout="row" layout-fill>
+  <div flex>
+    <form ng-submit="submit()" ng-controller="ClientsDetailsCtrl as client">
+      <md-card class="md-padding">
+        <div layout="row">
+          <div flex="85">
+            <div layout="row">
+              <div flex="50" class="text_2line">
+                <strong ng-if="!editMode">{{client.First_Name}}</strong>
+                <strong ng-if="!editMode">{{client.Last_Name}}</strong>
+                <input class="input-bolder" ng-if="editMode" ng-model="dataNow.FirstName" value="{{client.name}}">
+                <input class="input-bolder" ng-if="editMode" ng-model="dataNow.LastName" value="{{client.surname}}">
+                <p>Tel. {{client.Phone}}</p>
+              </div>
+              <div flex="25" class="text_2line">
+                <div id="fiz_details_1">
+                  <span ng-if="!editMode">{{client.Gender}}</span>
+                  <select ng-if="editMode" ng-model="client.Gender">
+                    <option ng-value="'V'">Vyras</option>
+                    <option ng-value="'M'">Moteris</option>
+                  </select>
+                  <p>lytis</p>
+                </div>
+              </div>
+              <div flex="25" class="text_2line">
+                <div id="fiz_details_2">
+                  <span ng-if="!editMode">{{client.Birthday}}</span>
+                  <input ng-model="dataNow.BirthDate" ng-if="editMode" type="date" value="{{client.Birthday}}">
+                  <p>Gimimo data</p>
+                </div>
+                <div flex="25">
+                  <md-button class="md-icon-button" ui-sref="clients.edit({id:1})">
+                    <i class="material-icons">edit</i>
+                  </md-button>
+                </div>
+                <div id="yur_details_2">
+                  <div flex="50">
+                    <span>{{client.Status}}</span>
+                    <p>Teisinis statusas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="yur_details_1">
+              <div layout="row">
+                <div flex="33" class="text_2line">
+                  <span>{{client.Company_No}}</span>
+                  <p>Įmonės kodas</p>
+                </div>
+                <div flex="33" class="text_2line">
+                  <span>{{client.VAT_No}}</span>
+                  <p>PVM kodas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="15" layout="row" style="justify-content:flex-end">
+            <!--md-button class="md-icon-button" ng-if="!crm.bar.isOpen" ng-click="crm.bar.toggle()">
+                  <i class="material-icons">people</i>
+              /md-button-->
+          </div>
+        </div>
+        <div>
+          <md-tabs md-dynamic-height>
+            <md-tab label="Kontaktinė">
+              <md-content md-colors="{background: 'default-background-hue-1'}">
+                <div class="marginTop-20">
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Adresas sąskaitai</b>
+                    </p>
+                    <span flex="50">{{client.Billing_Address}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>El. Paštas</b>
+                    </p>
+                    <span flex="50">{{client.Email}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Kontaktinis asmuo</b>
+                    </p>
+                    <span flex="50">{{client.Contact_Person}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Adresas pristatymui</b>
+                    </p>
+                    <span flex="50">{{client.Delivery_Address}}</span>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Pardavimų">
+              <md-content md-colors="{background: 'default-background-hue-1'}">
+                <div class="marginTop-20">
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Mokėjimo tipai</b>
+                    </p>
+                    <span ng-if="!editMode" flex="50">{{client.Payment_Type}}</span>
+                    <select ng-if="editMode" ng-controller="ClientsDetailsCtrl as clients_Details_ctrl" ng-model="client.Payment_Type">
+                      <option ng-repeat="PaymentType in clients_details_ctrl.Payment_Type_List" ng-value="'{{PaymentType.Pavadinimas}}'">{{PaymentType.Pavadinimas}}</option>
+                    </select>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Nuolaidos</b>
+                    </p>
+                    <span flex="50">{{client.Nuolaidos}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Vadybininkas</b>
+                    </p>
+                    <span flex="50">{{client.Sales_Manager}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Mokėjimo sąlygos</b>
+                    </p>
+                    <span ng-if="!editMode" flex="50">{{client.Payment_Terms}}</span>
+                    <select ng-if="editMode" ng-controller="ClientsEditCtrl as clients_edit_ctrl" ng-model="client.Payment_Terms">
+                      <option ng-repeat="PaymentTerms in clients_edit_ctrl.Payment_Terms_List" ng-value="'{{PaymentTerms.Kodas}}'">{{PaymentTerms.Kodas}}</option>
+                    </select>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Papildomai">
+              <md-content md-colors="{background: 'default-background-hue-1'}">
+                <div class="marginTop-20">
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Blokuotas</b>
+                    </p>
+                    <span ng-if="!editMode" flex="50">{{client.Blocked}}</span>
+                    <select ng-if="editMode" ng-model="client.Blocked" ng-change="log()">
+                      <option ng-value="'Taip'">Taip</option>
+                      <option ng-value="'Ne'">Ne</option>
+                    </select>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Pardavėjas</b>
+                    </p>
+                    <span ng-if="!editMode" flex="50">{{client.Is_Salesperson}}</span>
+                    <select ng-if="editMode" ng-model="client.Is_Salesperson">
+                      <option ng-value="'Taip'">Taip</option>
+                      <option ng-value="'Ne'">Ne</option>
+                    </select>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Magento</b>
+                    </p>
+                    <span flex="50">{{client.Magento}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Sukurta</b>
+                    </p>
+                    <span flex="50">{{client.Created}}</span>
+                  </div>
+                  <div class="text_2line" layout="row">
+                    <p flex="50">
+                      <b>Atnaujinta</b>
+                    </p>
+                    <span flex="50" value="{{$scope.dataNow.currentDate}}">{{client.Updated}}</span>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </div>
+      </md-card>
+      <md-button class="md-raised md-primary" ng-hide="editMode" ng-click="editMode = true">Redaguoti</md-button>
+      <md-button class="md-raised md-primary" ng-show="editMode" ng-click="editMode = false" type="submit">Išsaugoti</md-button>
+    </form>
+    <md-card layout="column">
+      <!--strong class="md-padding">Pardavimai</strong>
+              <div layout="row" class="md-padding">
+                  <div flex="50">
+                      <div class="text_2line">
+                          <span>Jonas Jonaitis (1124)</span>
+                          <p>Vadybinikas</p>
+                      </div>
+                      <div class="text_2line">
+                          <span>Iš karto už 3 mėn.</span>
+                          <p>Mokėjimo sąlygos</p>
+                      </div>
+                  </div>
+                  <div flex="50">
+                      <div class="text_2line">
+                          <span>UAB 7Pack (061)</span>
+                          <p>Pardavėjas</p>
+                      </div>
+                      <div class="text_2line">
+                          <span>Nėra</span>
+                          <p>Nuolaida</p>
+                      </div>
+                  </div>
+              </div-->
+      <md-divider></md-divider>
+      <div layout="row">
+        <div flex="50" layout="column" class="md-padding">
+          <strong>Užsakymai</strong>
+          <div layout="column" layout-align="center center" class="md-padding">
+            Užsakymų nėra
+          </div>
+        </div>
+        <md-divider></md-divider>
+        <div flex="50" layout="column" class="md-padding">
+          <strong>Mokėjimai</strong>
+          <div layout="column" layout-align="center center" class="md-padding">
+            Mokėjimų nėra
+          </div>
+        </div>
+      </div>
+    </md-card>
+  </div>
+  <md-sidenav class="md-sidenav-right" md-component-id="right" md-is-locked-open="crm.bar.isOpen" md-whiteframe="4" flex>
+    <md-list>
+      <md-list-item>
+        <span>CRM Veiksmai</span>
+        <md-button class="md-icon-button md-secondary">
+          <i class="material-icons">add</i>
+        </md-button>
+      </md-list-item>
+      <md-list-item layout="row" layout-align="center center">
+        <div layout="column" class="indicator_wrap" flex="33">
+          <span>1</span>
+          <p>Liko</p>
+        </div>
+        <div layout="column" class="indicator_wrap" flex="33">
+          <span>0</span>
+          <p>Pradelsta</p>
+        </div>
+        <div layout="column" class="indicator_wrap" flex="33">
+          <span>3</span>
+          <p>Viso</p>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+      <div layout="row" layout-align="space-between center" class="md-padding">
+        <strong>Istorija</strong>
+        <md-button class="md-icon-button">
+          <i class="material-icons">filter_list</i>
+        </md-button>
+      </div>
+      <md-divider></md-divider>
+      <md-list-item class="md-3-line" ng-click="null">
+        <div class="md-avatar" layout="row" layout-align="start center" layout-fill>
+          <i class="material-icons">mail</i>
+        </div>
+        <div class="md-list-item-text">
+          <h3> El-laiškas iki 2017/10/25 12:00 </h3>
+          <p> Džordana (1122) </p>
+        </div>
+        <i class="md-secondary material-icons">check_box_outline_blank</i>
+      </md-list-item>
+      <md-list-item class="md-3-line" ng-click="null">
+        <div class="md-avatar" layout="row" layout-align="start center" layout-fill>
+          <i class="material-icons">phone</i>
+        </div>
+        <div class="md-list-item-text">
+          <h3>Skambutis iki 2017/10/25 12:00 </h3>
+          <p> Džordana (1122) </p>
+          <p>Atlika 2017/10/24 14:15</p>
+        </div>
+        <i flex="10" class="md-secondary material-icons">check_box</i>
+      </md-list-item>
+      <md-list-item class="md-3-line" ng-click="null">
+        <div class="md-avatar" layout="row" layout-align="start center" layout-fill>
+          <i class="material-icons">note</i>
+        </div>
+        <div class="md-list-item-text">
+          <h3>Užduotis iki 2017/10/25 12:00 </h3>
+          <p>Džordana (1122) </p>
+          <p>Atlika 2017/10/24 14:15</p>
+        </div>
+        <i class="md-secondary material-icons">check_box</i>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</div>

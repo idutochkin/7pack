@@ -1,0 +1,55 @@
+<md-card layout="column">
+    <div layout="row" >
+            <div flex="5" layout="row" layout-align="center center">
+                <i class="material-icons" >search</i>
+            </div>
+            <div class="material_input_container" flex="85">
+                <input/>
+                <label>Paieška</label>
+            </div>
+            <md-button class="" layout="row" layout-align="center center" ng-click="filter.toggle()">
+                <i class="material-icons" ng-if="!filter.enable">filter_list</i>
+                <i class="material-icons" ng-if="filter.enable">close</i>
+            </md-button>
+            <md-button class="md-primary" layout="row" layout-align="center center" ui-sref="sales.create">
+                <i class="material-icons">add</i>
+            </md-button>
+    </div>
+    <div ng-if="filter.enable" layout-gt-xs="row" layout="column">
+        <div class="material_input_container" >
+            <input type="date"/>
+            <label>Data nuo</label>
+        </div>
+        <div class="material_input_container" >
+            <input type="date"/>
+            <label>Data iki</label>
+        </div>
+        <md-button>Filtruoti</md-button>
+    </div>
+</md-card>
+<md-card>
+    <table class="md_table">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Klientas</th>
+                <th>Data</th>
+                <th>Statusas</th>
+                <th>Produkų kiekis</th>
+                <th>Suma</th>
+                <th>Pardavėjas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="i in [1144,552,14,1014,1003,9800,1447,3369]" class="pointer" ui-sref="sales.details({id:1234})"> 
+                <th>{{i}}</th>
+                <th>Gediminas Valaitis</th>
+                <th>2017-09-14</th>
+                <th>Vykdomas</th>
+                <th>1</th>
+                <th>120 Eur</th>
+                <th>UAB 7Pack</th>
+            </tr>
+        </tbody>
+    </table>
+</md-card>

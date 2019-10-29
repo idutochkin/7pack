@@ -1,0 +1,35 @@
+<md-card style="margin:auto;max-width:960px">
+    <span class="md-title md-padding">
+        Krepšių Komplektavimas
+    </span>
+    <form class="md-padding" ng-submit="complete(barcodeInput)" layout="row" layout-align="start center">
+        <input ng-model="barcodeInput" require placeholder="Barkodas"/>
+        <!-- <md-button type="submit" >
+            Įvesti
+        </md-button> -->
+    </form>
+    <md-divider class="md-padding" ng-if="sum"></md-divider>
+    <table class="material_table" ng-if="sum">
+        <thead>
+            <tr>
+                <th>Planas</th>
+                <th>Sukomplektuota</th>
+                <th>Viso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="i in tableData">
+                <th>{{i.Planas}}</th>
+                <th>{{i.Sukomplektuota}}</th>
+                <th>{{i.Viso}}</th>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Suma :</td>
+                <td>{{sum.Sukomplektuota}}</td>
+                <td>{{sum.Viso}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</md-card>

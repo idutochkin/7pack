@@ -1,0 +1,43 @@
+<div layout="row" layout-fill>
+        <div class="browser_wrap_expanded">
+            <div>
+                <div layout="row" layout-fill layout-align="space-between center" class="browser_search_wrap">
+                    <div flex="20" layout="column" layout-align="center center">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <input class="browser_input">
+                    <div flex="20" layout="column" layout-align="center center">
+                        <md-button class="md-icon-button">
+                            <i class="material-icons">filter_list</i>
+                        </md-button>
+                    </div>  
+                    <div flex="20" layout="column" layout-align="center center">
+                        <md-button class="md-icon-button" ui-sref="settings.employees.new">
+                            <i class="material-icons">add</i>
+                        </md-button>
+                    </div>
+                </div>
+                <div>
+                    <md-content>
+                            <md-list>
+                                <md-list-item class="md-3-line" ui-sref="settings.employees.details({id:1234})" ng-repeat="i in [1,2,3,4,5,6]">
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3>Jonas Jonaitis</h3>
+                                        <h4>Administrator</h4>
+                                        <p layout="row" layout-align="space-between center">
+                                            <span>Administration Department</span>
+                                            <span>1093</span>
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                    </md-content>
+                </div>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        
+        <md-content flex ui-view></md-content>
+        
+    
+    </div>

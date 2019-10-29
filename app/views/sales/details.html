@@ -1,0 +1,130 @@
+<div layout="column" >
+        <div flex="50" layout="column" layout-gt-md="row">
+            <md-card layout="column" layout-align="space-between stretch" flex="50">
+                <div>
+                    <md-subheader>Užsakymo duomenys</md-subheader>
+                    <div layout-gt-sm="row" layout-align-gt-sm="space-between center" layout="column">
+                        <div class="material_input_container" flex="50">
+                            <span>U-1700149</span>
+                            <label>Užsakymo numeris</label>
+                        </div>
+                        <div class="material_input_container" flex="50">
+                            <span>2017-11-15</span>
+                            <label>Užsakymo data</label>
+                        </div>
+                    </div>
+                    <div layout-gt-sm="row" layout-align-gt-sm="space-between center" layout="column">
+                        <div class="material_input_container" flex="50">
+                            <span>Aktyvus</span>
+                            <label>statusas</label>
+                        </div>
+                        <div class="material_input_container" flex="50">
+                            <span>149 Eur</span> 
+                            <label>Kaina</label>
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" layout-align="end center">
+                    <md-button layout="row" layout-align="center center" class="md-raised" ui-sref="salesData.orderConfirmation({id:1234})">
+                        <i class="material-icons">receipt</i>
+                    </md-button>
+                    <md-button layout="row" layout-align="center center" class="md-raised" >
+                        <i class="material-icons">edit</i>
+                    </md-button>
+                    <md-button layout="row" layout-align="center center" class="md-raised" ui-sref="sales.create">
+                        <i class="material-icons">content_copy</i>
+                    </md-button>
+                </div>
+            </md-card>
+            <md-card layout="column" flex="50">
+                <md-subheader>Klientas</md-subheader>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <span>Gediminas Valaitis</span>
+                        <label>Vardas Pavardė</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <span>Laisves pr 100</span>
+                        <label>Užsakymo adresas</label>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <span>Bankiniu pavedimu</span>
+                        <label>mokėjimo tipas</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <span>14 d. atinėjimas</span>
+                        <label>mokėjimo sąlygos</label>
+                    </div>
+                </div>
+                <div class="material_input_container" >
+                    <span>UAB 7Pack</span>
+                    <label>pardavėjas</label>
+                </div>
+                <md-divider></md-divider>
+                <div layout-gt-sm="row" layout="column">
+                    <div class="material_input_container" flex="50">
+                        <span>Nera</span>
+                        <label>nuolaida</label>
+                    </div>
+                    <div class="material_input_container" flex="50">
+                        <span>-</span>
+                        <label>nuolaidos kodas</label>
+                    </div>
+                </div>
+                <div class="material_input_container" >
+                    <span>Pristatant skambinti</span>
+                    <label>Komentaras</label>
+                </div>
+            </md-card>
+        </div>
+    
+        <md-card flex="50" layout="column">
+            <md-subheader >
+                <div layout="row" layout-align="space-between center">
+                    <span>Užsakymo detalizacija</span>
+                    <div layout="row">
+                    </div>
+                </div>
+            </md-subheader>
+            <table class="md_table text-small">
+                <thead>
+                    <tr>
+                        <th>Tipas</th>
+                        <th>Produktas</th>
+                        <th>Klientas</th>
+                        <th>Pristatymo adresas</th>
+                        <th>Kiekis</th>
+                        <th>Trukmė</th>
+                        <th>Pirma diena</th>
+                        <th>Kaina Vnt.</th>
+                        <th>Suma</th>
+                        <th>Nuolaida</th>
+                        <th>Galutinė</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+                        <th>Patiekalas</th>
+                        <th><strong>813 | Ryžių makaronai su Tofu</strong></th>
+                        <th>Gediminas Valaitis</th>
+                        <th>L.Asanaviciutes 14, Vilnius</th>
+                        <th>18</th>
+                        <th>18</th>
+                        <th>2017-12-01</th>
+                        <th>7,99 Eur</th>
+                        <th>39,95 Eur</th>
+                        <th>-</th>
+                        <th>39,95 Eur</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div layout="row" layout-align="end center" class="order_sum">
+                <span>Viso: </span>
+                <strong>390,50 Eur</strong>
+            </div>
+        </md-card>
+    
+    </div>
+    

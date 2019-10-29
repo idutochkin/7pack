@@ -1,0 +1,88 @@
+<div layout-fill layout="column">
+    <md-toolbar layout="row" layout-align="start center">
+        <md-button layout="row" layout-align="center center" ui-sref="recipies.browser.selected({id:1234})">
+            <i class="material-icons">arrow_back</i>
+        </md-button>
+        <md-button layout="row" layout-align="center center" ng-click="print()">
+            <i class="material-icons">print</i>
+        </md-button>
+        <md-button layout="row" layout-align="center center" ng-click="export()">
+            <i class="material-icons">file_download</i>
+        </md-button>
+    </md-toolbar>
+    <div class="datasheet_wrap" flex>
+        <div class="datasheet_paper" layout="column" id="datasheet">
+            <div layout="row" layout-align="start stretch">
+                <div>
+                    <img src="images/7pack_grey.png" class="datasheet_logo">
+                </div>
+                <div class="datasheet_header_data" layout="column" layout-align="space-between start">
+                   <span>UAB "7Pack"</span>
+                   <span>Technologinės kortelės nr.: 8</span>
+                   <span>Gaminio pavadinimas: Patiekalas H</span>
+                </div> 
+            </div>
+            <table class="material_table">
+                <thead>
+                    <tr>
+                        <th>Eil. Nr.</th>
+                        <th>Pavadinimas</th>
+                        <th>Žaliavos tipas</th>
+                        <th>Mato Vnt.</th>
+                        <th>Brutto</th>
+                        <th>Išeiga</th>
+                        <th>Kcal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in [1,2,3,4]">
+                        <th>{{i}}</th>
+                        <th>Žaliava {{i}}</th>
+                        <th>Žaliava</th>
+                        <th>G</th>
+                        <th>12.00</th>
+                        <th>10.56</th>
+                        <th>67.5</th>
+                    </tr>
+                </tbody>
+            </table>
+            <strong>Gamybos proceso aprašymas</strong>
+            <table class="material_table table_default_width">
+                <thead>
+                    <tr>
+                        <th>Aprašymas</th>
+                        <th>Žingsnio nr.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in [1,2]">
+                        <th>Aprašymas {{i}}</th>
+                        <th>{{i}}</th>
+                    </tr>
+                </tbody>
+            </table>
+            <strong>Tinkamumo vartoti terminas</strong>
+            <table class="material_table table_default_width">
+                <thead>
+                    <tr>
+                        <th>Min Temp.</th>
+                        <th>Max Temp.</th>
+                        <th>Trukmė</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <th>1 C</th>
+                        <th>15 C</th>
+                        <th>24 h</th>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                Patvirtinta:
+            </p>
+            <md-divider></md-divider>
+        </div>
+    </div>
+</div>
+

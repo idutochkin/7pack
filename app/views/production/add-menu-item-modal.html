@@ -1,0 +1,24 @@
+<div style="width : 65vw ; height : 75vh" layout="column">
+    <div layout="row" class="md-padding" layout-align="center center">
+        <input class="modalSearchInput" ng-model="searchInput"  placeholder="Paieška" flex="70"/>
+        <div flex="10" layout="row" layout-align="center center">
+            <md-progress-circular ng-show="loading" md-diameter="30"></md-progress-circular>
+            <md-button class="md-icon-button" ng-hide="loading || !searchInput" ng-click="clean()">
+                <i class="material-icons">close</i>
+            </md-button>
+        </div>
+        <md-button flex ng-click="select(null)">Atšaukti</md-button>
+    </div>
+    <md-divider></md-divider>
+    <md-content flex>
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="item in results | filter : searchInput" ng-click="select(item)">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{item.ID}} | {{ item.Pavadinimas }}</h3>
+                    <h4>{{ item.Tipas }}</h4>
+                    <p>{{ item.Statusas }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>

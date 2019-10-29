@@ -1,0 +1,80 @@
+<div layout="row" layout-fill>
+        <div class="browser_wrap_expanded">
+            <div>
+                <div layout="row" layout-fill layout-align="start center" class="browser_search_wrap">
+                    <div flex="20" layout="column" layout-align="center center">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <input class="browser_input"> 
+                </div>
+                <md-separator></md-separator>
+                <div>
+                    <md-content>
+                        <md-list>
+                            <md-list-item ng-repeat="i in ['Matavimo vienetai','Rinkinių statusai', 'Patiekalų statusai'] " ng-click="null">
+                                <span>{{i}} (50)</span>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                </div>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        
+        <md-content flex >
+            <md-card >
+                <md-list>
+                    <div layout="row" layout-align="space-between center">
+                        <strong class="md-padding">
+                            Klasifikatoriai
+                        </strong>
+                        <input placeholder="filter" class="material_input">
+                        <div layout="row">
+                            <md-button layout="row" layout-align="center center">
+                                <i class="material-icons">edit</i>
+                            </md-button>
+                            <md-button layout="row" layout-align="center center">
+                                <i class="material-icons">add</i>
+                            </md-button>
+                        </div>
+                        
+                    </div>
+                    <md-divider></md-divider>
+                    <!-- <md-list-item ng-repeat="i in [11,22,33,44,55,66]" class="secondary-button-padding">
+                        <p>Klasifikatorius {{i}}</p>
+                        <md-button layout="row" layout-align="center center" ng-click="edit(i)">
+                            <i class="material-icons">edit</i>
+                        </md-button>
+                        <md-button layout="row" layout-align="center center" ng-click="delete(i)">
+                            <i class="material-icons">delete</i>
+                        </md-button>
+                    </md-list-item> -->
+                    <table class="md_table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Pavadinimas</th>
+                                <th>Grupė</th>
+                                <th>Aktyvus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="i in [11,22,33,44,55,66]">
+                                <th>{{$index}}</th>
+                                <th>Classificator ({{i}})</th>
+                                <th>-</th>
+                                <th>
+                                    <input type="checkbox">
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-list>
+            </md-card>
+            <div layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary">Išsaugoti</md-button>
+            </div>
+        </md-content>
+        
+    
+    </div>

@@ -1,0 +1,44 @@
+<div layout="row" layout-fill>
+  <md-content class="browser_wrap_expanded">
+    <div>
+      <div layout="row" layout-fill layout-align="space-between center" class="browser_search_wrap">
+        <div flex="20" layout="column" layout-align="center center">
+          <i class="material-icons">search</i>
+        </div>
+        <input class="browser_input" ng-model="input" ng-change="search(input)">
+        <div flex="40" layout="row" layout-align="center center">
+          <md-button class="md-icon-button" ng-click="cleanSearch()">
+            <i class="material-icons">close</i>
+          </md-button>
+          <md-button class="md-icon-button" ng-click="createNewSet()">
+            <i class="material-icons">add</i>
+          </md-button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <md-list ng-hide="loading">
+            <md-list-item class="md-3-line" ui-sref="production.menuPlaningBrowser.menuPlaning({id:i.ID})" ng-repeat="i in sets">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{i.Pavadinimas}}</h3>
+                <p layout="row" layout-align="space-between center">
+                  <span>{{i.Statusas}}</span>
+                  <span>id: {{i.ID}}</span>
+                </p>
+              </div>
+            </md-list-item>
+          </md-list>
+
+        </div>
+        <div layout="row" layout-align="center center" layout-fill ng-show="loading">
+          <md-progress-circular></md-progress-circular>
+        </div>
+      </div>
+    </div>
+  </md-content>
+  <md-divider></md-divider>
+
+  <md-content flex ui-view></md-content>
+
+
+</div>

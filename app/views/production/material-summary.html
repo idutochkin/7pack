@@ -1,0 +1,85 @@
+<md-card layout="row" layout-fill>
+  <div flex="80">
+    <!-- <div style="max-width:705px" layout-wrap layout="row">
+            <div  ng-repeat="i in [1,2,3,4,5,6,7]" class="sticker_container">
+                <img src="https://7packstorage.blob.core.windows.net/erp/images/nesildyti1_m.png">
+                <div class="sticker_header">
+                    <span>Pusryčiai</span>
+                </div>
+                <div class="sticker_name">
+                    <span id="sticker_block_1"></span>
+                    <span id="sticker_block_2"></span>
+                    <span id="sticker_block_3"></span>
+                    Patielalas su kažuom ir skaniu padažu
+                </div>
+                <div class="sticker_body">
+                        <span id="sticker_block_4"></span>
+                        <span id="sticker_block_7"></span>
+                        <span id="sticker_block_5"></span>
+                        <span id="sticker_block_8"></span>
+                        <span id="sticker_block_6"></span>
+                        <span id="sticker_block_9"></span>
+                        <span id="sticker_block_10"></span>
+                        <span id="sticker_block_11"></span>
+                    Textas aprašantis patie kalą Textas apraš antis p atiekalą Textas apra šantis patiekaląatiekalą Textas apra šantis patiekalą
+                    <div class="sticker_table_wrap">
+                        <table class="sticker_table">
+                            <thead>
+                                <tr>
+                                    <th>Baltymai</th>
+                                    <th>Angliavandeniai</th>
+                                    <th>Riebalai</th>
+                                    <th>Kalorijos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>4.93 g</th>
+                                    <th>4.93 g</th>
+                                    <th>4,93 g</th>
+                                    <th>500 kcal</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="sticker_attributes">
+                    <img ng-repeat="i in [1,2,3,4,5,6,7]" src="images/icons/attr_veg.png" class="sticker_att_img" />
+                </div>
+                <div class="sticker_footer">
+                    <label>Suvartoti iki</label>
+                    <div>2018.02.27</div>
+                </div>
+            </div>
+        </div> -->
+  </div>
+  <md-divider></md-divider>
+  <div flex layout="column" class="md-padding">
+    <!-- <span style="text-align:center" class="md-title">{{calendar.date | date : "fullDate"}}</span> -->
+    <span style="text-align:center" class="md-title">Nuo: </span>
+    <div layout="row" layout-align="center center" class="md-padding">
+      <md-datepicker ng-model="calendarFrom.date" md-open-on-focus></md-datepicker>
+    </div>
+    <span style="text-align:center" class="md-title">Iki: </span>
+    <div layout="row" layout-align="center center" class="md-padding">
+      <md-datepicker ng-model="calendarTo.date" md-open-on-focus></md-datepicker>
+    </div>
+    <!-- <div layout="row">
+      <md-button layout="row" layout-align="center center" flex ng-click="calendar.go('prev')">
+        <i class="material-icons">
+          skip_previous
+        </i>
+      </md-button>
+      <md-button layout="row" layout-align="center center" flex ng-click="calendar.go('next')">
+        <i class="material-icons">
+          skip_next
+        </i>
+      </md-button>
+    </div> -->
+    <md-button layout="row" layout-align="center center" class="md-raised md-primary">
+      <i class="material-icons">
+        print
+      </i>
+    </md-button>
+  </div>
+</md-card>
