@@ -45,6 +45,6 @@
     "dependencies": {
         "angular-chart.js": "^1.1.1",
         "angularjs-dropdown-multiselect": "^2.0.0-beta.10",
-        "lodash": "^4.17.10"
+        "lodash": "^4.17.19"
     }
 }
